@@ -1,0 +1,59 @@
+COUNTRY|CODE|CURRENCY CODE<br>
+Vietnam|VNM<br> |VND
+Argentina|ARG<br>|ARS
+Australia|AUS<br>|AUD
+Brazil|BRA<br>|BRL
+Britain|GBR<br>|GBP
+Canada|CAN<br>|CAD
+Chile|CHL<br>|CLP
+China|CHN<br>|CNY
+Colombia|COL<br>|COP
+Costa Rica|CRI<br>|CRC
+Czech Republic|CZE<br>|CZK
+Denmark|DNK<br>|DKK
+Egypt|EGY<br>|EGP
+Euro area|EUR<br>|EUR
+Hong Kong|HKG<br>|HKD
+Hungary|HUN<br>|HUF
+India|IND<br>|INR
+Indonesia|IDN<br>|IDR
+Israel|ISR<br>|ILS
+Japan|JPN<br>|JPY
+Lithuania|LTU<br>|LTL
+Malaysia|MYS<br>|MYR
+Mexico|MEX<br>|MXN
+New Zealand|NZ<br>|NZD
+Norway|NOR<br>|NOK
+Pakistan|PAK<br>|PKR
+Peru|PER<br>|PEN
+Philippines|PHL<br>|PHP
+Poland|POL|PLN<br>
+Russia|RUS|RUB<br>
+Saudi Arabia|SAR|SAU<br>
+Singapore|SIN|SGD<br>
+South Africa|ZAF|ZAR<br>
+South Korea|KOR|KRW<br>
+Sri Lanka|LKA|LKR<br>
+Sweden|SWE|SEK<br>
+Switzerland|CHE|CHE/CHF/CHW<br>
+Taiwan|ROC|TWD<br>
+Thailand|THA<br>
+Turkey|TUR|TRY<br>
+UAE|UAE|AED<br>
+Ukraine|UKR|UAH<br>
+United States|USA|USD<br>
+Uruguay|URY|UYU<br>
+Venezuela|VEN|VEF<br>
+Austria|AUT|EUR<br>
+Belgium|BEL|EUR<br>
+Estonia|EST|EUR<br>
+Finland|FIN|EUR<br>
+France|FRA|EUR<br>
+Germany|DEU|EUR<br>
+Greece|GRC|EUR<br>
+Ireland|IRL|EUR<br>
+Italy|ITA|EUR<br>
+Netherlands|NLD|EUR<br>
+Portugal|PRT|EUR<br>
+Spain|ESP|EUR<br>
+Latvia|LVA|EUR<br>

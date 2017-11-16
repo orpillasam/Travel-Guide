@@ -1,9 +1,324 @@
 $(document).ready(function() {
 
-	// displayApi();
-	function displayApi() {
-		var subject = $(this).attr('data-name');
-		console.log("subject is " + subject);
+	var bigMacUSD = 5.3;
+	var exchangeRate;
+	var currency;
+	var selectedMonth;
+	var city;
+
+	var destinations = [
+			vietnam = {
+				countryName: 'Vietnam',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'VNM',
+				currencyCode: 'VND',
+			},
+			argentina = {
+				countryName: 'Argentina',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'ARG',
+				currencyCode: 'ARS',
+			},	
+			australia = {
+				countryName: 'Australia',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'AUS',
+				currencyCode: 'AUD',
+			},	
+			brazil = {
+				countryName: 'brazil',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'BRA',
+				currencyCode: 'BRL',
+			},						
+			britain = {
+				countryName: 'Britain',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'GBR',
+				currencyCode: 'GBP',
+			},	
+			chile = {
+				countryName: 'Chile',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'CHL',
+				currencyCode: 'CLP',
+			},	
+			china = {
+				countryName: 'China',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'CHN',
+				currencyCode: 'CNY',
+			},	
+			colombia = {
+				countryName: 'Colombia',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'COL',
+				currencyCode: 'COP',
+			},	
+			czechrepublic = {
+				countryName: 'Czech Republic',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'CZE',
+				currencyCode: 'CZK',
+			},	
+			denmark = {
+				countryName: 'Denmark',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'DNK',
+				currencyCode: 'DKK',
+			},	
+			egypt = {
+				countryName: 'Egypt',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'EGY',
+				currencyCode: 'EGP',
+			},	
+			hongkong = {
+				countryName: 'Hong Kong',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'HKG',
+				currencyCode: 'HKD',
+			},	
+			hungary = {
+				countryName: 'HUngary',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'HUN',
+				currencyCode: 'HUF',
+			},				
+			india = {
+				countryName: 'India',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'IND',
+				currencyCode: 'INR'
+			},
+			indonesi a= {
+				countryName: 'Indonesia',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'IDN',
+				currencyCode: 'IDR',
+			},
+			israel = {
+				countryName: 'Israel',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'ISR',
+				currencyCode: 'ILS',
+			}, 
+			japan = {
+				countryName: 'Japan',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'JPN',
+				currencyCode: 'JPY',
+			},
+			lithuania = {
+				countryName: 'Lithuania',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'LTU',
+				currencyCode: 'EUR',
+			},
+			malaysia = {
+				countryName: 'Malaysia',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'MYS',
+				currencyCode: 'MYR',
+			},
+			mexico = {
+				countryName: 'Mexico',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'MEX',
+				currencyCode: 'MXN',
+			},
+			newzealand = {
+				countryName: 'New Zealand',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'NZ',
+				currencyCode: 'NZD',
+			},
+			norway = {
+				countryName: 'Norway',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'NOR',
+				currencyCode: 'NOK',
+			},
+			pakistan = {
+				countryName: 'Pakistan',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'PAK',
+				currencyCode: 'PKR',
+			},
+			peru = {
+				countryName: 'Peru',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'PER',
+				currencyCode: 'PEN',
+			},
+			philippines = {
+				countryName: 'Philippines',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'PHL',
+				currencyCode: 'PHP',
+			},
+			poland = {
+				countryName: 'Poland',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'POL',
+				currencyCode: 'PLN',
+			},
+			russia = {
+				countryName: 'Russia',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'RUS',
+				currencyCode: 'RUB',
+			},
+			saudiarabia = {
+				countryName: 'Saudi Arabia',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'SAU',
+				currencyCode: 'SAR',
+			},
+			singapore = {
+				countryName: 'Singapore',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'SIN',
+				currencyCode: 'SGD',
+			},
+			southafrica = {
+				countryName: 'South Africa',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'ZAF',
+				currencyCode: 'ZAR',
+			},
+			southkorea = {
+				countryName: 'South Korea',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'KOR',
+				currencyCode: 'KRW',
+			},
+			srilanka = {
+				countryName: 'Sri Lanka',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'LKA',
+				currencyCode: 'LKR',
+			},
+			sweden = {
+				countryName: 'Sweden',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'SWE',
+				currencyCode: 'SKE',
+			},	
+			switzerland = {
+				countryName: 'SWITZERLAND',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'CHE',
+				currencyCode: 'CHF',
+			},
+			taiwan = {
+				countryName: 'Taiwan',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'ROC',
+				currencyCode: 'TWD',
+			},
+			thailand = {
+				countryName: 'Thailand',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'THA',
+				currencyCode: 'THB',
+			},
+			turkey = {
+				countryName: 'Turkey',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'TUR',
+				currencyCode: 'TRY',
+			},
+			uae = {
+				countryName: 'United Arab Emirates',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'UAE',
+				currencyCode: 'AED',
+			},
+			ukraine = {
+				countryName: 'Ukraine',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'UKR',
+				currencyCode: 'UAH',
+			},
+			usa = {
+				countryName: 'United States of America',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'USA',
+				currencyCode: 'USD',
+			},
+			uruguay = {
+				countryName: 'Uruguay',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'URY',
+				currencyCode: 'UYU',
+			},
+			venezuela = {
+				countryName: 'Venezuela',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'VEN',
+				currencyCode: 'VEF',
+			},
+			austria = {
+				countryName: 'Austria',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'AUT',
+				currencyCode: 'EUR',
+			},
+			belgium = {
+				countryName: 'Belgium',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'BEL',
+				currencyCode: 'EUR',
+			},
+			estonia = {
+				countryName: 'Estonia',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'EST',
+				currencyCode: 'EUR',
+			},
+			finland = {
+				countryName: 'Finland',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: '',
+				currencyCode: '',
+			},
+
+
+
+
+	]
+	
+	//will create a var called destinations with objects inside which are. Country[Cities][Currency code][Country Code]
+	// will need to convert month into an index number, 0-11.
+
+	//takes values from input fields and puts them into variables.  Runs the API functions
+	$('#submit-button').on('click', function(event){
+
+		event.preventDefault();
+		var currencyLower = $('#currency-input').val().trim();
+		currency = currencyLower.toUpperCase();
+		console.log('currency type is ' + currency);
+
+		var cityLower = $('#city-input').val().trim();
+		city = cityLower.toUpperCase();
+		console.log("selected city is " + city);
+
+		var countryLower = $('#country-input').val().trim();
+		country = countryLower.toUpperCase();
+		console.log("country is " + country);
+
+		selectedMonth = $('#month-input').val().trim();
+		console.log('month is ' + selectedMonth);
+
+		setTimeout(bigMac, 1000); //delayed since the exchange rate API needs to load first
+		getCurrentExchangeRate();
+		monthlyWeather();
+		
+	});
+
+	//calls the currency exchange API.  Gets the current exchange rate of the input country. this is set in USD
+	function getCurrentExchangeRate() {	
 
 		var queryURL = "https://v3.exchangerate-api.com/bulk/b23eabf8c9716038ad266c7b/USD"
 		 		
@@ -13,123 +328,85 @@ $(document).ready(function() {
         }).done(function(response) {
         	console.log(response);
         	var results = response.rates;
+           	console.log("country is " + currency);
 
-        	var exchangeRateDiv = $('div');
-        	exchangeRate = results.AED;
-        	console.log('exchange rate is' + exchangeRate);
-        	$('#exchange-display').text(exchangeRate);
-
-
-        });
-
-     }
-
-     // exchangeRateHistory();
-     function exchangeRateHistory() {
-     	var subject = $(this).attr('data-name');
-		console.log("subject is " + subject);
-
-		var queryURL = "https://v3.exchangerate-api.com/archive/b23eabf8c9716038ad266c7b/USD/2012/11/14"
-		 		
-        $.ajax({
-          url: queryURL,
-          method: "GET"
-        }).done(function(response) {
-        	console.log(response);
-        	var results = response.rates;
+           	//currently using the currency input field, but we will put each country in an object and call the currency from there
+           	//and we will call the currency code of the selected country
+           	exchangeRate = results[currency];  
+   	     	console.log('exchange rate is' + exchangeRate);
+        	$('#exchange-rate').text(exchangeRate + " " + currency + " to USD");
 
         });
-
-
      }
-     bigMac();
+     
+     //  calls the big mac API. returns cost index and price of big bag in USD
     function bigMac() {
-    	var subject = $(this).attr('data-name');
-		console.log("subject is " + subject);
 
-		var queryURL = "https://www.quandl.com/api/v3/datasets/ECONOMIST/BIGMAC_CHN?start_date=2017-07-31&end_date=2017-07-31&api_key=9TGtJzuQxqvJizpJDPXX"
-		
-		 		
+    	//ALERT - will need to change the var country to the country code. will need to put info a country object
+		var queryURL = "https://www.quandl.com/api/v3/datasets/ECONOMIST/BIGMAC_" + country + "?start_date=2017-07-31&end_date=2017-07-31&api_key=9TGtJzuQxqvJizpJDPXX"
+				 		
         $.ajax({
           url: queryURL,
           method: "GET"
         }).done(function(response) {
         	console.log(response);
         	var results = response.dataset;
+
+        	// the cost of a big mac in the input country's currency 
+        	var countryPrice = (results.data[0][1]);
+
+        	//the cost of a big mac in the input country, in USD
+        	var CountryDollarPrice = countryPrice / exchangeRate;
+        	console.log(CountryDollarPrice);
+
+        	// the USA big mac price divided by the big mac price in the input country 
+        	var bigMacIndex = bigMacUSD / CountryDollarPrice;
+        	console.log(bigMacIndex);
+        	$('#big-mac-cost').text("$" +CountryDollarPrice);
+        	$('#big-mac-index').text(bigMacIndex);
 
         });
 
     }
-
-    // weather();
-    function weather(){
-
-    	var subject = $(this).attr('data-name');
-		console.log("subject is " + subject);
-
-		var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=455783e66fb6bb9a0d380e49bc2c4117"
-		
-		 		
-        $.ajax({
-          url: queryURL,
-          method: "GET"
-        }).done(function(response) {
-        	console.log(response);
-        	var results = response.dataset;
-
-        });
-    	
-       }
-       monthlyWeather();
+    
+    //calls the weather API to retrieve average climate data for the input city
     function monthlyWeather(){
-    	var subject = $(this).attr('data-name');
-		console.log("subject is " + subject);
 
-		var queryURL = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=1814235921e94fd2998195653171511&q=chicago&format=json&mca=yes&showmap=yes"
+		//needs a valid city name input		
+		var queryURL = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=1814235921e94fd2998195653171511&q=" + city + "&format=json&mca=yes&showmap=yes"
 		 		
         $.ajax({
           url: queryURL,
           method: "GET"
         }).done(function(response) {
         	console.log(response);
-        	var results = response.dataset;
+        	var results = response.data.ClimateAverages[0].month;
+    		console.log('selected month is ' + selectedMonth); //var selectedMonth is a user input. needs to be an index #, 0-11.
+
+    		//minimum temperature of the selected month in input city
+        	var minTemp = (results[selectedMonth].avgMinTemp_F);
+        	console.log("average min temp is " + minTemp);
+
+        	//maximum temperature of the selected month in input city
+        	var maxTemp = (results[selectedMonth].absMaxTemp_F);
+        	console.log("average max temp is " + maxTemp);
+
+        	//average daily rainfall in selected month in input city, in milimeters
+        	var averageDailyRainfall = (results[selectedMonth].avgDailyRainfall);
+        	console.log("average daily rainfall is " + averageDailyRainfall + "mm");
+
+        	//coverts the average rainfall into inches. *(days in a month) /(milimeters in a inch)
+        	var averageMonthRainfall = averageDailyRainfall * 30 / 25.4;
+        	console.log("average monthly rainfall is " + averageMonthRainfall + "in");
+
+        	$('#min-temp').text(minTemp + "F");
+        	$('#max-temp').text(maxTemp + "F");
+        	$('#average-rainfall').text(averageMonthRainfall + "inches");
 
         });	
     }
 
+	
+
 });
 
-// "2017-07-31"
-// 1
-// :
-// 5.3  cost in country dollars
-// 2
-// :
-// 1	exchange rate 
-// 3
-// :
-// 5.3 cost in USD
-// 4
-// :
-// 1	how many big macs you can buy in USD
-// 5
-// :
-// 0
-// 6
-// :
-// 0
-// 7
-// :
-// -1.5005913049094
-// 8
-// :
-// 16.178555240496
-// 9
-// :
-// 35.836244457314
-// 10
-// :
-// 10.581714525236
-// length
-// :
-// 11
