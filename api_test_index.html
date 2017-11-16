@@ -3,11 +3,45 @@
 <head>
 	<title>travel app</title>
 	<script src="https://code.jquery.com/jquery.js"></script>
-	<script src="logic.js"></script>
+	<script src="api_test.js"></script>
 
 </head>
 <body>
-<div id='exchange-display'></div>
+
+	<form>
+		<div class="form-group">
+			<label for="city-input">City</label>
+			<input type="text" class="form-control" id="city-input">
+		</div>
+		<div class="form-group">
+			<label for="country-input">Country</label> use CHN
+			<input type="text" class="form-control" id="country-input">
+		</div>
+		<div class="form-group">
+			<label for="currency-input">Currency</label> use CNY
+			<input type="text" class="form-control" id="currency-input">
+		</div>
+		<div class="form-group">
+			<label for="month-input">Month</label>
+			<input type="text" class="form-control" id="month-input">
+		</div>
+
+		<button id='submit-button'>Submit</button>
+	</form>
+
+	<div>This is the current exchange rate in this country</div>
+	<div id='exchange-rate'></div>
+	<div>This is cost to buy a big mac in this country in USD</div>
+	<div id='big-mac-cost'></div>
+	<div>This is the big mac index, how many big macs you can buy compared to the cost of 1 big mac in the US</div>
+	<div id='big-mac-index'></div>
+	<div>Minimum Temperature of this Country during this month</div>
+	<div id='min-temp'></div>
+	<div>Maximum Temperature of this Country during this month</div>
+	<div id='max-temp'></div>
+	<div>Average Monthly rainfall in this country during this month</div>
+	<div id='average-rainfall'></div>
+
 
 
 </body>
