@@ -91,7 +91,7 @@ $(document).ready(function() {
 				countryCode: 'IND',
 				currencyCode: 'INR'
 			},
-			indonesi a= {
+			indonesia = {
 				countryName: 'Indonesia',
 				cities: ['hanoi', 'ho chi minh city', 'de nang'],
 				countryCode: 'IDN',
@@ -280,13 +280,63 @@ $(document).ready(function() {
 			finland = {
 				countryName: 'Finland',
 				cities: ['hanoi', 'ho chi minh city', 'de nang'],
-				countryCode: '',
-				currencyCode: '',
+				countryCode: 'FIN',
+				currencyCode: 'EUR',
 			},
-
-
-
-
+			france = {
+				countryName: 'France',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'FRA',
+				currencyCode: 'EUR',
+			},
+			germany = {
+				countryName: 'Germany',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'DEU',
+				currencyCode: 'EUR',
+			},
+			ireland = {
+				countryName: 'Ireland',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'IRL',
+				currencyCode: 'EUR',
+			},
+			italy = {
+				countryName: 'Italy',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'ITA',
+				currencyCode: 'EUR',
+			},
+			netherlands = {
+				countryName: 'Netherlands',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'NLD',
+				currencyCode: 'EUR',
+			},
+			greece = {
+				countryName: 'Greece',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'GRC',
+				currencyCode: 'EUR',
+			},
+			portugal = {
+				countryName: 'Portugal',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'PRT',
+				currencyCode: 'EUR',
+			},
+			spain = {
+				countryName: 'Spain',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'ESP',
+				currencyCode: 'EUR',
+			},
+			latvia = {
+				countryName: 'Latvia',
+				cities: ['hanoi', 'ho chi minh city', 'de nang'],
+				countryCode: 'LVA',
+				currencyCode: 'EUR',
+			}
 	]
 	
 	//will create a var called destinations with objects inside which are. Country[Cities][Currency code][Country Code]
