@@ -13,16 +13,22 @@ $(document).ready(function() {
 	$('#submit-button').on('click', function(event){
 
 		event.preventDefault();
-		currency = $('#currency-input').val().trim();
+		var currencyLower = $('#currency-input').val().trim();
+		currency = currencyLower.toUpperCase();
 		console.log('currency type is ' + currency);
-		city = $('#city-input').val().trim();
+
+		var cityLower = $('#city-input').val().trim();
+		city = cityLower.toUpperCase();
 		console.log("selected city is " + city);
-		country = $('#country-input').val().trim();
+
+		var countryLower = $('#country-input').val().trim();
+		country = countryLower.toUpperCase();
 		console.log("country is " + country);
+
 		selectedMonth = $('#month-input').val().trim();
 		console.log('month is ' + selectedMonth);
 
-		setTimeout(bigMac, 2000);
+		setTimeout(bigMac, 1000); //delayed since the exchange rate API needs to load first
 		getCurrentExchangeRate();
 		monthlyWeather();
 		
@@ -45,7 +51,7 @@ $(document).ready(function() {
            	//and we will call the currency code of the selected country
            	exchangeRate = results[currency];  
    	     	console.log('exchange rate is' + exchangeRate);
-        	$('#exchange-rate').text(exchangeRate);
+        	$('#exchange-rate').text(exchangeRate + " " + currency + " to USD");
 
         });
      }
@@ -73,7 +79,7 @@ $(document).ready(function() {
         	// the USA big mac price divided by the big mac price in the input country 
         	var bigMacIndex = bigMacUSD / CountryDollarPrice;
         	console.log(bigMacIndex);
-        	$('#big-mac-cost').text(CountryDollarPrice);
+        	$('#big-mac-cost').text("$" +CountryDollarPrice);
         	$('#big-mac-index').text(bigMacIndex);
 
         });
