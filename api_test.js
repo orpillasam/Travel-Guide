@@ -7,7 +7,7 @@ $(document).ready(function() {
 	var city;
 	
 	//will create a var called destinations with objects inside which are. Country[Cities][Currency code][Country Code]
-
+	// will need to convert month into an index number, 0-11.
 
 	//takes values from input fields and puts them into variables.  Runs the API functions
 	$('#submit-button').on('click', function(event){
@@ -42,7 +42,7 @@ $(document).ready(function() {
            	console.log("country is " + currency);
 
            	//currently using the currency input field, but we will put each country in an object and call the currency from there
-           	and we will call the currency code of the selected country//
+           	//and we will call the currency code of the selected country
            	exchangeRate = results[currency];  
    	     	console.log('exchange rate is' + exchangeRate);
         	$('#exchange-rate').text(exchangeRate);
@@ -92,7 +92,7 @@ $(document).ready(function() {
         }).done(function(response) {
         	console.log(response);
         	var results = response.data.ClimateAverages[0].month;
-    		console.log('selected month is ' + selectedMonth); //var selectedMonth is a user input
+    		console.log('selected month is ' + selectedMonth); //var selectedMonth is a user input. needs to be an index #, 0-11.
 
     		//minimum temperature of the selected month in input city
         	var minTemp = (results[selectedMonth].avgMinTemp_F);
