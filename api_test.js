@@ -16,6 +16,11 @@ $(document).ready(function() {
 	var currency;
 	var selectedMonth;
 	var city;
+	var minTemp;
+	var maxTemp;
+	var averageMonthRainfall;
+	var countryDollarPrice;
+	var bigMacIndex;
 
 
 	//********still need to update the citi names*****************
@@ -375,11 +380,74 @@ $(document).ready(function() {
 		selectedMonth = $('#month-input').val().trim();
 		console.log('month is ' + selectedMonth);
 
-		setTimeout(bigMac, 1000); //delayed since the exchange rate API needs to load first
-		getCurrentExchangeRate();
-		monthlyWeather();
+		var userSearch = {
+			currency:currency,
+			countryName:country,
+			cityName:city,
+			month:selectedMonth,
+		}
+
+		database.ref().push(userSearch);
+
+		$('#currency-input').val('');
+		$('#city-input').val('');
+		$('#country-input').val('');
+		$('#month-input').val('');
 		
 	});
+
+	database.ref().on('child_added', function(childSnapshot, prevChildKey){
+
+	  	console.log(childSnapshot.val());
+
+	  	currency = childSnapshot.val().currency;
+	  	country = childSnapshot.val().countryName;
+	  	city = childSnapshot.val().cityName;
+	  	selectedMonth = childSnapshot.val().month;
+
+	  	console.log("currency is " + currency);
+	  	console.log("country is " + country);
+	  	console.log(" city is " + city);
+	  	console.log("month is " + selectedMonth);
+
+		setTimeout(bigMac, 500); //delayed since the exchange rate API needs to load first
+		getCurrentExchangeRate();
+		monthlyWeather();
+		setTimeout(travelCard, 1000);
+
+	  });
+
+	function travelCard(){
+
+		var cardDiv = $('<div>');
+		var minTempNumber = parseInt(minTemp);
+		console.log(minTemp);
+		var maxTempNumber = parseInt(maxTemp);
+		console.log(maxTemp);
+		var averageTemp = (minTempNumber + maxTempNumber) / 2;
+		console.log('average temp is ' + averageTemp);
+		var exchangeRateConverted = Math.round(exchangeRate * 100) / 100;
+		var countryDollarPriceConverted = Math.round(countryDollarPrice * 100) / 100;
+		var bigMacIndexConverted = Math.round(bigMacIndex * 100) / 100;
+		var averageMonthRainfallConverted = Math.round(averageMonthRainfall * 100) / 100;
+		// $('#exchange-rate').text(exchangeRate + " " + currency + " to USD");
+		// $('#big-mac-cost').text("$" +CountryDollarPrice);
+  //   	$('#big-mac-index').text(bigMacIndex);
+  //   	$('#min-temp').text(minTemp + "F");
+  //   	$('#max-temp').text(maxTemp + "F");
+    	// $('#average-rainfall').text(averageMonthRainfall + "inches");
+    	cardDiv.append()
+    	cardDiv.append(exchangeRateConverted + " " + currency);
+    	cardDiv.append('<br>');
+    	cardDiv.append("$" + countryDollarPriceConverted);
+    	cardDiv.append('<br>');
+    	cardDiv.append(bigMacIndexConverted);
+    	cardDiv.append('<br>');
+    	cardDiv.append(averageTemp + "F");
+    	cardDiv.append('<br>');
+    	cardDiv.append(averageMonthRainfallConverted + " in")
+    	$('#card-well').append(cardDiv);
+	}
 
 	//calls the currency exchange API.  Gets the current exchange rate of the input country. this is set in USD
 	function getCurrentExchangeRate() {	
@@ -398,7 +466,7 @@ $(document).ready(function() {
            	//and we will call the currency code of the selected country
            	exchangeRate = results[currency];  
    	     	console.log('exchange rate is' + exchangeRate);
-        	$('#exchange-rate').text(exchangeRate + " " + currency + " to USD");
+        	// $('#exchange-rate').text(exchangeRate + " " + currency + " to USD");
 
         });
      }
@@ -420,14 +488,14 @@ $(document).ready(function() {
         	var countryPrice = (results.data[0][1]);
 
         	//the cost of a big mac in the input country, in USD
-        	var CountryDollarPrice = countryPrice / exchangeRate;
-        	console.log(CountryDollarPrice);
+        	countryDollarPrice = countryPrice / exchangeRate;
+        	console.log(countryDollarPrice);
 
         	// the USA big mac price divided by the big mac price in the input country 
-        	var bigMacIndex = bigMacUSD / CountryDollarPrice;
+        	bigMacIndex = bigMacUSD / countryDollarPrice;
         	console.log(bigMacIndex);
-        	$('#big-mac-cost').text("$" +CountryDollarPrice);
-        	$('#big-mac-index').text(bigMacIndex);
+        	// $('#big-mac-cost').text("$" +CountryDollarPrice);
+        	// $('#big-mac-index').text(bigMacIndex);
 
         });
 
@@ -448,11 +516,11 @@ $(document).ready(function() {
     		console.log('selected month is ' + selectedMonth); //var selectedMonth is a user input. needs to be an index #, 0-11.
 
     		//minimum temperature of the selected month in input city
-        	var minTemp = (results[selectedMonth].avgMinTemp_F);
+        	minTemp = (results[selectedMonth].avgMinTemp_F);
         	console.log("average min temp is " + minTemp);
 
         	//maximum temperature of the selected month in input city
-        	var maxTemp = (results[selectedMonth].absMaxTemp_F);
+        	maxTemp = (results[selectedMonth].absMaxTemp_F);
         	console.log("average max temp is " + maxTemp);
 
         	//average daily rainfall in selected month in input city, in milimeters
@@ -460,12 +528,12 @@ $(document).ready(function() {
         	console.log("average daily rainfall is " + averageDailyRainfall + "mm");
 
         	//coverts the average rainfall into inches. *(days in a month) /(milimeters in a inch)
-        	var averageMonthRainfall = averageDailyRainfall * 30 / 25.4;
+        	averageMonthRainfall = averageDailyRainfall * 30 / 25.4;
         	console.log("average monthly rainfall is " + averageMonthRainfall + "in");
 
-        	$('#min-temp').text(minTemp + "F");
-        	$('#max-temp').text(maxTemp + "F");
-        	$('#average-rainfall').text(averageMonthRainfall + "inches");
+        	// $('#min-temp').text(minTemp + "F");
+        	// $('#max-temp').text(maxTemp + "F");
+        	// $('#average-rainfall').text(averageMonthRainfall + "inches");
 
         });	
     }

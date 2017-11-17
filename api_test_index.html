@@ -1,39 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>travel app</title>
+	<title>Burger Backpack</title>
 	<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="api_test.js"></script>
 
 </head>
 <body>
-	<h1>Burger Burger</h1>
-	<br>
-	<br>
-	<form>
-		<div class="form-group">
-			<label for="city-input">City</label>
-			<input type="text" class="form-control" id="city-input">use a valid city
-		</div>
-		<div class="form-group">
-			<label for="country-input">Country Code</label> 
-			<input type="text" class="form-control" id="country-input">see below for country codes
-		</div>
-		<div class="form-group">
-			<label for="currency-input">Currency Code</label> 
-			<input type="text" class="form-control" id="currency-input">see below for currency codes. CNY OR CAD for example
-		</div>
-		<div class="form-group">
-			<label for="month-input">Month index</label>
-			<input type="text" class="form-control" id="month-input">use 0-11 as the index number for the month (0 being january)
-		</div>
 
-		<button id='submit-button'>Submit</button>
-	</form>
+<div>
+	<h1>Burger Backpack</h1>
+</div>
+	<br>
+	<br>
+	<div>	
+		<form>
+			<div class="form-group">
+				<label for="city-input">City</label>
+				<input type="text" class="form-control" id="city-input">use a valid city
+			</div>
+			<div class="form-group">
+				<label for="country-input">Country Code</label> 
+				<input type="text" class="form-control" id="country-input">see below for country codes
+			</div>
+			<div class="form-group">
+				<label for="currency-input">Currency Code</label> 
+				<input type="text" class="form-control" id="currency-input">see below for currency codes. CNY OR CAD for example
+			</div>
+			<div class="form-group">
+				<label for="month-input">Month index</label>
+				<input type="text" class="form-control" id="month-input">use 0-11 as the index number for the month (0 being january)
+			</div>
 
+			<button id='submit-button'>Submit</button>
+		</form>
+	</div>
+	
 	<br>
-	<br>
+	<div>
+		<div id='card-well'></div>
+		<br>
+		
+<!-- 	</div>
 	<div>This is the current exchange rate in this country</div>
 	<div id='exchange-rate'></div>
 	<div>This is cost to buy a big mac in this country in USD</div>
@@ -45,7 +54,7 @@
 	<div>Maximum Temperature of this Country during this month</div>
 	<div id='max-temp'></div>
 	<div>Average Monthly rainfall in this country during this month</div>
-	<div id='average-rainfall'></div>
+	<div id='average-rainfall'></div> -->
 <br>
 <br>
 COUNTRY|CODE|CURRENCY CODE<br>
