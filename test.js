@@ -1,7 +1,9 @@
 //Autocomplete request/response expectations: https://stackoverflow.com/questions/5077409/what-does-autocomplete-request-server-response-look-like
 //Requires  ajax/jquery UI and style
-$(function () 
- {
+
+
+
+$(document).ready(function () {
 	 $("#f_elem_city").autocomplete({
 		source: function (request, response) {
 		 $.getJSON(
@@ -38,6 +40,8 @@ $(function ()
 
 
 });
+
+
 
 // $.getJSON(
 //      "http://gd.geobytes.com/AutoCompleteCity?callback=?&q=los",
