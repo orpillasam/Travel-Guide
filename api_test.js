@@ -1,11 +1,25 @@
 $(document).ready(function() {
+	// Initialize Firebase
+	var config = {
+	apiKey: "AIzaSyDYIymwE96hrnwsMAd2DjJT5NTywGQDLHQ",
+	authDomain: "project1-burger.firebaseapp.com",
+	databaseURL: "https://project1-burger.firebaseio.com",
+	projectId: "project1-burger",
+	storageBucket: "",
+	messagingSenderId: "297665083434"
+	};
+	firebase.initializeApp(config);
 
+  	var database = firebase.database();
 	var bigMacUSD = 5.3;
 	var exchangeRate;
 	var currency;
 	var selectedMonth;
 	var city;
 
+
+	//********still need to update the citi names*****************
+	//destination (country name) variable is all lowercase
 	var destinations = [
 			vietnam = {
 				countryName: 'Vietnam',
@@ -339,7 +353,7 @@ $(document).ready(function() {
 			}
 	]
 	
-	//will create a var called destinations with objects inside which are. Country[Cities][Currency code][Country Code]
+	
 	// will need to convert month into an index number, 0-11.
 
 	//takes values from input fields and puts them into variables.  Runs the API functions
@@ -455,8 +469,6 @@ $(document).ready(function() {
 
         });	
     }
-
-	
 
 });
 
