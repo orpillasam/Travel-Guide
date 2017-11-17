@@ -123,16 +123,16 @@ $(document).ready(function() {
         }); 
     }
 
-    function cityNames(){
-    var queryURL = "http://api.geonames.org/hierarchyJSON?q=&username=codechennerator";
-      $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).done(function(response){
-        console.log(response);
-      });
-    }
-    cityNames();
+    // function cityNames(){
+    // var queryURL = "http://api.geonames.org/hierarchyJSON?q=&username=codechennerator";
+    //   $.ajax({
+    //     url: queryURL,
+    //     method: "GET"
+    //   }).done(function(response){
+    //     console.log(response);
+    //   });
+    // }
+    // cityNames();
 
   
 
