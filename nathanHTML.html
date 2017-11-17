@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>travel app</title>
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script type="text/javascript" src="nathanJS.js"></script>
+	<script src = "destinations.json"></script>
+	<script type="text/javascript" src="test.js"></script>
+
+</head>
+<body>
+	<h1>Burger Burger</h1>
+	<br>
+	<br>
+	<form>
+		<div class="form-group">
+			<label for="city-input">City</label>
+			<input type="text" class="form-control" id="city-input">use a valid city
+		</div>
+		<div class="form-group">
+			<label for="country-input">Country Code</label> 
+			<select type="text" class="form-control" id="country-input"></select>
+		</div>
+		<div class="form-group">
+			<label for="currency-input">Currency Code</label> 
+			<input type="text" class="form-control" id="currency-input">see below for currency codes. CNY OR CAD for example
+		</div>
+		<div class="form-group">
+			<label for="month-input">Month index</label>
+			<input type="text" class="form-control" id="month-input">use 0-11 as the index number for the month (0 being january)
+		</div>
+
+		<button id='submit-button'>Submit</button>
+	</form>
+
+	<br>
+	<br>
+	<div>This is the current exchange rate in this country</div>
+	<div id='exchange-rate'></div>
+	<div>This is cost to buy a big mac in this country in USD</div>
+	<div id='big-mac-cost'></div>
+	<div>This is the big mac index, how many big macs you can buy compared to the cost of 1 big mac in the US</div>
+	<div id='big-mac-index'></div>
+	<div>Minimum Temperature of this Country during this month</div>
+	<div id='min-temp'></div>
+	<div>Maximum Temperature of this Country during this month</div>
+	<div id='max-temp'></div>
+	<div>Average Monthly rainfall in this country during this month</div>
+	<div id='average-rainfall'></div>
+<br>
+<br>
+COUNTRY|CODE|CURRENCY CODE<br>
+Vietnam|VNM|VND<br> 
+Argentina|ARG|ARS<br>
+Australia|AUS|AUD<br>
+Brazil|BRA|BRL<br>
+Britain|GBR|GBP<br>
+Chile|CHL|CLP<br>
+China|CHN|CNY<br>
+Colombia|COL|COP<br>
+<!-- Costa Rica|CRI|CRC<br>  not in exchange rate-->
+Czech Republic|CZE|CZK<br>
+Denmark|DNK|DKK<br>
+Egypt|EGY|EGP<br>
+Euro area|EUR|EUR<br>
+Hong Kong|HKG|HKD<br>
+Hungary|HUN|HUF<br>
+India|IND|INR<br>
+Indonesia|IDN|IDR<br>
+Israel|ISR|ILS<br>
+Japan|JPN|JPY<br>
+Lithuania|LTU|EUR<br>
+Malaysia|MYS|MYR<br>
+Mexico|MEX|MXN<br>
+New Zealand|NZ|NZD<br>
+Norway|NOR|NOK<br>
+Pakistan|PAK|PKR<br>
+Peru|PER|PEN<br>
+Philippines|PHL|PHP<br>
+Poland|POL|PLN<br>
+Russia|RUS|RUB<br>
+Saudi Arabia|SAU|SAR<br>
+Singapore|SIN|SGD<br>
+South Africa|ZAF|ZAR<br>
+South Korea|KOR|KRW<br>
+Sri Lanka|LKA|LKR<br>
+Sweden|SWE|SEK<br>
+Switzerland|CHE|CHE/CHF/CHW<br>
+Taiwan|ROC|TWD<br>
+Thailand|THA|THB<br>
+Turkey|TUR|TRY<br>
+UAE|UAE|AED<br>
+Ukraine|UKR|UAH<br>
+United States|USA|USD<br>
+Uruguay|URY|UYU<br>
+Venezuela|VEN|VEF<br>
+Austria|AUT|EUR<br>
+Belgium|BEL|EUR<br>
+Estonia|EST|EUR<br>
+Finland|FIN|EUR<br>
+France|FRA|EUR<br>
+Germany|DEU|EUR<br>
+Greece|GRC|EUR<br>
+Ireland|IRL|EUR<br>
+Italy|ITA|EUR<br>
+Netherlands|NLD|EUR<br>
+Portugal|PRT|EUR<br>
+Spain|ESP|EUR<br>
+Latvia|LVA|EUR<br>
+
+<form action="" method="post" name="form_citydetails" id="form_citydetails" enctype="multipart/form-data" onsubmit="return false;">
+<p><b>Please enter</b> your city here to see it work. <input class="ff_elem" type="text" name="ff_nm_from[]" value="" id="f_elem_city"/>
+
+</body>
+</html>
