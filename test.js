@@ -62,23 +62,22 @@ $(document).ready(function () {
 			 // 	}
 			 // 	placesArray.push(valueObject);
 			 // }
+			 
 			 response(data);
 			}
 		 );
 		},
 		minLength: 3,
 		select: function (event, ui) {
-		 var selectedObj = ui.item;
-		 console.log(selectedObj);
-		 $("#f_elem_city").val(selectedObj.value);
-	
-		 return false;
+			var selectedObj = ui.item;
+			$("#f_elem_city").val(selectedObj.value);
+		 	return false;
 		},
 		open: function () {
-		 $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+			$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
 		},
 		close: function () {
-		 $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+			$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
 		}
 	 });
 	 $("#f_elem_city").autocomplete("option", "delay", 100);
@@ -94,6 +93,7 @@ $(document).ready(function () {
 		Part 2: Run the info through our APIs and show desired values.
 	------------------------------------------------------------------------*/
 	var country, city, currency, selectedMonth;
+	
 	const bigMacUSD = 5.3;
 
 
@@ -200,7 +200,7 @@ $(document).ready(function () {
 	 	var queryURL = "http://gd.geobytes.com/GetCityDetails?callback=?&fqcn=" + cityValues;
 	 	// var queryURL = "http://free.rome2rio.com/api/1.4/json/Search?key=7slkssQD&oName=" + country + "&dName=" + country;
 	 	$.ajax({
-	 	  dataType: "json",
+	 	  dataType: "json", //Some APIs don't know what datatype to return unless you tell them to!
           url: queryURL,
           method: "GET"
         }).done(function(data) {
@@ -227,7 +227,7 @@ $(document).ready(function () {
 	 		$('#f_elem_city').val("");
 	 		$('#month-input').val("");
 	 	}else{
-	 		alert('Warning: Bad input!');
+	 		alert('Warning: Bad input!'); //Change later
 	 	}
 
 	 });
