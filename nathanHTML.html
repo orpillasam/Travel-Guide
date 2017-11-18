@@ -4,37 +4,15 @@
 	<title>travel app</title>
 	<!--CDN Code-->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
-<link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/flick/jquery-ui.css" />
- <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/flick/jquery-ui.css" />
+ 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 	<!-- My code -->
-	<script type="text/javascript" src="nathanJS.js"></script>
 	<script type="text/javascript" src="test.js"></script>
 
 </head>
 <body>
 	<h1>Burger Burger</h1>
 	<br>
-	<br>
-	<form>
-		<div class="form-group">
-			<label for="city-input">City</label>
-			<input type="text" class="form-control" id="city-input">use a valid city
-		</div>
-		<div class="form-group">
-			<label for="country-input">Country Code</label> 
-			<select type="text" class="form-control" id="country-input"></select>
-		</div>
-		<div class="form-group">
-			<label for="currency-input">Currency Code</label> 
-			<input type="text" class="form-control" id="currency-input">see below for currency codes. CNY OR CAD for example
-		</div>
-		<div class="form-group">
-			<label for="month-input">Month index</label>
-			<input type="text" class="form-control" id="month-input">use 0-11 as the index number for the month (0 being january)
-		</div>
-
-		<button id='submit-button'>Submit</button>
-	</form>
 
 	<br>
 	<br>
@@ -52,12 +30,16 @@
 	<div id='average-rainfall'></div>
 <br>
 
-
-<form enctype="multipart/form-data" onsubmit="return false;">
-	<p>Where are you going? 
+<form>
+	<div class="form-group">
+		<label for = "f_elem_city">Where are you going?</label> 
 		<input class="ff_elem" type="text" name="ff_nm_from[]" value="" id="f_elem_city"/>
-		<button id='nc-submit-city'>Submit</button>
-	</p>
+	</div>
+	<div class="form-group">
+		<label for="month-input">Month index</label>
+		<input type="text" class="form-control" id="month-input">use 0-11 as the index number for the month (0 being january)
+	</div>
+	<button id='nc-submit-city'>Submit</button>
 </form>
 </body>
 </html>
