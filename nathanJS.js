@@ -339,4 +339,9 @@ for(let i =0; i<destinations.length; i++){ //Loads the options into drop down bo
 		$option.text(destinations[i].countryName);
 		$('#country-input').append($option);
 	}
+
+
+/*Adding submit functionality for rome2rio API*/
+
+
 });
