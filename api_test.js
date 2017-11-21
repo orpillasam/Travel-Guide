@@ -572,5 +572,3 @@ $(document).ready(function() {
 });
 
   
-
-});
