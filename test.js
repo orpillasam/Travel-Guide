@@ -225,11 +225,14 @@ $(document).ready(function () {
 	 		var cityValues = $('#f_elem_city').val().trim(); //Gets a city in format: City, State Initials, Country
 	 		requiredInfo(cityValues); 		
 	 		$('#f_elem_city').val("");
-	 		$('#month-input').val("");
+			 $('#month-input').val("");
+			 $('#testForm').animate(function(){
+				 top: 50
+			 }, 1000);
 	 	}else{
 	 		alert('Warning: Bad input!'); //Change later
-	 	}
-
+		 }
+		 
 	 });
 });
 
