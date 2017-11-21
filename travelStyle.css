@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.field {
+	display: inline-block;
+}
+/*
+.container {
+	margin: 0;
+	width: 940px;
+	max-width: 100%;
+}*/
+
+
+
+#navbar-logo {
+height: 80px;
+width: auto;
+
+}
+
+#main-header, #results-display {
+	outline: solid;
+	outline-width: 1px;
+	justify-content: center;
+}
+#results-display {
+	padding-top: 70px;
+}
+.site-bio {
+	text-align: center;
+	padding: 75px;
+	padding-bottom: 25px;
+}
+
+.search-bars {
+	margin-left: 300px;
+	padding-top: 250px; 
+}
+.search-button {
+	margin-top: 32px;
+}
+.icon-info-div {
+	text-align: center;
+	margin-bottom: 50px;
+}
+.detail-icons {
+	margin: 10px;
+}
+
+.col-6 {
+	margin-right: 0px;
+}
+.col-3 {
+	display: inline-block;
+	margin-right: 0px;
+}
+.control {
+	display: inline-block;
+}
+.destination-search-bar {
+	margin-top: 50px;
+	padding-bottom: 100px;
+}
+
+
+.navbar-brand {
+	text-align: center;
+}
+
+.result-images {
+	margin-bottom: 55px;
+}
+ .destination-data {
+ 	margin-right: 12px;
+ }
+
+  #fb-logo, #ig-logo, #tw-logo {
+ 	width: 50px;
+ 	height: 50px;
+ 	margin: 5px;
+ }
