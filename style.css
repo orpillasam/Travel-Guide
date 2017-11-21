@@ -16,7 +16,7 @@
 	background-color: grey;
 }
 .card-div.over {
-	border: 2px dashed #000;
+	border: 4px dashed #000;
 }
 .temperature, .big-mac-price, 
 .big-mac-index, .rainfall{

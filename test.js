@@ -301,8 +301,7 @@ function handleDragLeave(e) {
 }
 function handleDrop(e) {
   // this/e.target is current target element.
-  console.log(this);
-  console.log(dragSrcEl);
+
 	if (e.stopPropagation) {
 		e.stopPropagation(); // Stops some browsers from redirecting.
 	}
@@ -312,11 +311,13 @@ function handleDrop(e) {
 		dragSrcEl.innerHTML = this.innerHTML;
 		this.innerHTML = e.originalEvent.dataTransfer.getData('text/html');
 	}
+	this.classList.remove('over');
   	return false;
 }
 function handleDragEnd(e) {
 // this/e.target is the source node.
 	this.style.opacity = '1.0';
+	this.classList.remove('over');
 }
 function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, 
 					country, city, selectedMonth, averageTemp, averageMonthRainfall){
