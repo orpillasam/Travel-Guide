@@ -138,10 +138,6 @@ $(document).ready(function() {
           var averageMonthRainfall = averageDailyRainfall * 30 / 25.4;
           
 		  
-          $('#min-temp').text(minTemp + "F");
-          $('#max-temp').text(maxTemp + "F");
-		  $('#average-rainfall').text(averageMonthRainfall + "inches");
-		  
 		  console.log('finding average temp');
 		  var minTempNumber = parseInt(minTemp);
 		  var maxTempNumber = parseInt(maxTemp);
@@ -177,8 +173,6 @@ $(document).ready(function() {
           // the USA big mac price divided by the big mac price in the input country 
           var bigMacIndex = bigMacUSD / countryDollarPrice;
           
-          $('#big-mac-cost').text("$" +countryDollarPrice);
-          $('#big-mac-index').text(bigMacIndex);
 		  getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth);
         });
 
@@ -200,7 +194,6 @@ $(document).ready(function() {
             //and we will call the currency code of the selected country
           var exchangeRate = results[currency];  
           console.log('exchange rate is' + exchangeRate);
-          $('#exchange-rate').text(exchangeRate + " " + currency + " to USD");
 
           getBicMacIndex(exchangeRate, currency, country, city, selectedMonth); //We must call getBigMac here because we need the exchange rate after exchange rate is called.
 
