@@ -271,6 +271,53 @@ $(document).ready(function() {
 	 });
 });
 
+/*---------------------------------------Travel Card Functions----------------------------------- */
+ 
+var dragSrcEl;
+function handleDragStart(e){
+	this.style.opacity = '0.4';
+
+	console.log(e);
+	dragSrcEl = this;
+	e.originalEvent.dataTransfer.effectAllowed = 'move';
+	e.originalEvent.dataTransfer.setData('text/html', this.innerHTML);
+}
+
+function handleDragOver(e) {
+	if (e.preventDefault) {
+	  e.preventDefault(); // Necessary. Allows us to drop.
+	}
+  
+	e.originalEvent.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+  
+	return false;
+}
+function handleDragEnter(e) {
+	// this / e.target is the current hover target.
+	this.classList.add('over');
+}  
+function handleDragLeave(e) {
+	this.classList.remove('over');  // this / e.target is previous target element.
+}
+function handleDrop(e) {
+  // this/e.target is current target element.
+  console.log(this);
+  console.log(dragSrcEl);
+	if (e.stopPropagation) {
+		e.stopPropagation(); // Stops some browsers from redirecting.
+	}
+  // Don't do anything if dropping the same column we're dragging.
+	if (dragSrcEl != this) {
+		// Set the source column's HTML to the HTML of the column we dropped on.
+		dragSrcEl.innerHTML = this.innerHTML;
+		this.innerHTML = e.originalEvent.dataTransfer.getData('text/html');
+	}
+  	return false;
+}
+function handleDragEnd(e) {
+// this/e.target is the source node.
+	this.style.opacity = '1.0';
+}
 function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, 
 					country, city, selectedMonth, averageTemp, averageMonthRainfall){
 	
@@ -321,15 +368,22 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			countryDollarPriceConvertedDiv.append(countryDollarPriceConverted);
 			
 			imageDiv1 = $('<div>');
-			imageDiv1.append("<img id='image1' src='images/icon1.png' />")
+			imageDiv1.append("<img id='image1' src='images/icon1.png' draggable = 'false' />")
 			imageDiv2 = $('<div>');
-			imageDiv2.append("<img id='image2' src='images/icon2.png' />")
+			imageDiv2.append("<img id='image2' src='images/icon2.png' draggable = 'false'/>")
 			imageDiv3 = $('<div>');
-			imageDiv3.append("<img id='image3' src='images/icon3.png' />")
+			imageDiv3.append("<img id='image3' src='images/icon3.png' draggable = 'false'/>")
 	
 	
 	
-			$(cardDiv).addClass('card-div');
+			$(cardDiv).attr({'class':'card-div', 'draggable': true});
+			$(cardDiv).on('dragstart',handleDragStart);
+			$(cardDiv).on('dragenter',handleDragEnter);
+			$(cardDiv).on('dragleave', handleDragLeave);
+			$(cardDiv).on('dragover',handleDragOver);
+			$(cardDiv).on('drop', handleDrop);
+			$(cardDiv).on('dragend', handleDragEnd);
+
 			cardDiv.append(cityDiv);
 			cardDiv.append(countryDiv);
 			cardDiv.append(imageDiv1);
@@ -346,6 +400,6 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 	
 			cardDiv.append(averageMonthRainfallConvertedDiv)
 			cardDiv.append(exchangeRateConvertedDiv);
-			$('#card-well').append(cardDiv);
+			$('#card-well').prepend(cardDiv);
 		}
 
