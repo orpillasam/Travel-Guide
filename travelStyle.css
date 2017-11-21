@@ -9,20 +9,16 @@
 }
 
 .container {
+	margin: 0;
 	width: 940px;
 	max-width: 100%;
 }
 
-.navbar-header {
-	width: 100%;
-	height: 50px;
-	text-align: center;
 
-}
-#navbar {
-	display: inline-block;
-	align-content: center;
-	margin-top: 15px;
+
+#navbar-logo {
+height: 122px;
+width: 111px;	
 
 }
 
