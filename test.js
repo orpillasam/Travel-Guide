@@ -298,7 +298,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			var exchangeRateConvertedDiv = $('<div>');
 			exchangeRateConvertedDiv.addClass('exchange-rate');
 			exchangeRateConvertedDiv.text(exchangeRateConverted);
-			exchangeRateConvertedDiv.append(currency + " to USD");
+			exchangeRateConvertedDiv.append(currency + " to 1 USD");
 	
 	
 			var bigMacIndexConvertedDiv = $('<div>');
