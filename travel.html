@@ -11,98 +11,106 @@
 
 </head>
 <body>
-	<div class="container">	
+	<div class="container-fluid">	
 		
 		<!-- Search bars row ========================================-->			
 		<div class="row" id="main-header">
+			<div class="container">
+				<!-- <nav class="navbar navbar-expand-lg navbar-light offset-md-5">
+					<a class="navbar-brand" id="navbar" href="#">Navbar</a>
+				</nav> -->
+				<nav class="navbar-header">
+					<a id="navbar" href="#">Navbar</a>
+				</nav>
+			</div>
+		</div>	
 
 
-			<!-- Country search column ========================================-->
-			<div class="col-3" class="field">
-				<label class="label">Country</label>
-				<p class="control has-icons-left">
-					<span class="select" id="country-search">
-						<select>
-							<option selected>Country</option>
-							<option>Select dropdown</option>
-							<option>With options</option>
-						</select>
-					</span>
-					<span class="icon is-small is-left">
-						<i class="fa fa-globe"></i>
-					</span>
-				</p>
-			</div>
-			<!-- City search column ========================================-->
-			<div  class="col-3" class="field" id="city-search">
-				<label class="label">City</label>
-				<div class="control">
-					<div class="select" id="city-search">
-						<select>
-							<option>Select dropdown</option>
-							<option>With options</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			<!-- Month to travel search column ========================================-->
-			<div class="col-3" class="field" id="month-search">
-				<label class="label">Month</label>
-				<div class="control">
-					<div class="select" id="month-search">
-						<select>
-							<option>Select dropdown</option>
-							<option>With options</option>
-						</select>
-					</div>
-				</div>
-			</div>	
-			<!-- search button column ========================================-->					
-			<div class="col-3" class="field">
-				<p class="control">
-					<a class="button is-primary" id="search-button">
-						Search
-					</a>
+
+
+
+
+		<!-- Country search input ========================================-->
+				<div class="site-bio">
+				<h1>Welcome to TravelByte!</h1>
+				<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit! </h2>
+				<p>Aliquam ultrices ligula a risus finibus, sed auctor ante volutpat. Quisque cursus eget ipsum id scelerisque. Nullam urna orci, posuere vitae venenatis vel, sodales non libero. Aliquam erat volutpat. Proin a sem ut justo pretium euismod. Maecenas vestibulum malesuada lacinia. Ut egestas, elit at congue dignissim, nunc leo ullamcorper odio, et consectetur urna purus at enim. Integer pretium ipsum vitae sodales mattis.
+
+				Integer eget egestas dui. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu quam quis eros cursus consequat. Donec suscipit malesuada diam, eget pulvinar neque semper quis.
 				</p>
 			</div>
 
-		</div>
-		
+			<div class="row destination-search-bar">
+				<div class="col-md-4 offset-md-2 field">
+					<label class="label">Where are you going?</label>
+					<form>
+						<div class="form-row">
+							<div class="col">
+								<input type="text" class="form-control" placeholder="Destination">
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<!-- Month to travel search drop-down========================================-->
+				<div class="col-md-2" class="field" id="month-search">
+					<label class="label">Month</label>
+					<div class="control">
+						<div class="select" id="month-search">
+							<select>
+								<option>Select dropdown</option>
+								<option>With options</option>
+							</select>
+						</div>
+					</div>
+				</div>	
+				<!-- search button column ========================================-->					
+				<div class="col-md-2 search-button" class="field">
+					<p class="control">
+						<a class="button is-primary">
+							Search
+						</a>
+					</p>
+				</div>
+
+			</div>
+		<div class="icon-info-div">
+						<img class="detail-icons" src="http://via.placeholder.com/100x100">
+						<img class="detail-icons" src="http://via.placeholder.com/100x100">
+						<img class="detail-icons" src="http://via.placeholder.com/100x100">
+						<img class="detail-icons" src="http://via.placeholder.com/100x100">
+		</div>		
 
 		<!-- Results row ========================================-->
 		<div class="row" id="results-display">
 
 			<!-- city/country results col -->
-			<div class="col-4">
+			<div class="col-3">
 				<div class="row">
-				<p class="col-6" id="destination-city">Destination City</p>
-				<p class="col-6" id="destination-country">Destination Country</p>
-			</div>
+					<p class="col-3 offset-md-3" id="destination-city">Destination</p>
+				</div>
 			</div>
 			<!-- date results col -->
 			<p class="col-3" id="destination-month">Month of Travel</p>
-			<div class="col-5" id="destination-data">
-				<div class="row">
+			<div class="col-5">
+				<div class="row destination-data">
 					<div class="col-3">
-						<img src="http://via.placeholder.com/100x100">
-					</div>
-					<div class="col-3">
-						<img src="http://via.placeholder.com/100x100">
+						<img class="result-images" src="http://via.placeholder.com/100x100">
 					</div>
 					<div class="col-3">
-						<img src="http://via.placeholder.com/100x100">
+						<img class="result-images" src="http://via.placeholder.com/100x100">
 					</div>
 					<div class="col-3">
-						<img  src="http://via.placeholder.com/100x100">
+						<img class="result-images" src="http://via.placeholder.com/100x100">
 					</div>
-				</div>
-						<!-- <img class="col-3" src="http://via.placeholder.com/50x50">
-						<img class="col-3" src="http://via.placeholder.com/500x500">
-						<img class="col-3" src="http://via.placeholder.com/500x500"> -->
+					<div class="col-3">
+						<img class="result-images" src="http://via.placeholder.com/100x100">
 					</div>
-					
 				</div>
 			</div>
+					
+		</div>
+	</div> <!--end container-fluid div-->
 
 
 
