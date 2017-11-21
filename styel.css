@@ -1,0 +1,20 @@
+.location {
+	font-size: 24px;
+	width: 400px;
+	height: 190px;
+}
+.card-div{
+	color: grey;
+	font-family: georgia;
+	font-size: 30px;
+	width: 800px;
+	height: 200px;
+}
+
+.temperature, .exchange-rate, .big-mac-price, .big-mac-index, .rainfall{
+	border: 2px solid black;
+	height: 60px;
+	width: 60px;
+
+
+}
