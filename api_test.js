@@ -445,37 +445,55 @@ $(document).ready(function() {
 
 		var exchangeRateConvertedDiv = $('<div>');
 		exchangeRateConvertedDiv.addClass('exchange-rate');
-		exchangeRateConvertedDiv.text();  // temporary hard code
+		exchangeRateConvertedDiv.text(exchangeRateConverted);
+		exchangeRateConvertedDiv.append(currency + " to USD");
+
 
 		var bigMacIndexConvertedDiv = $('<div>');
-		bigMacIndexConvertedDiv.addClass('exchange-rate');
-		bigMacIndexConvertedDiv.text(exchangeRateConverted);  //temporary hard code
+		bigMacIndexConvertedDiv.addClass('big-mac-index');
+		bigMacIndexConvertedDiv.text(bigMacIndexConverted);  //temporary hard code
 
 		var averageTempDiv = $('<div>');
 		averageTempDiv.addClass('temperature');
 		averageTempDiv.text(averageTemp); //temperature hard code
+		averageTempDiv.append(" F");
 
 		var averageMonthRainfallConvertedDiv = $('<div>');
 		averageMonthRainfallConvertedDiv.addClass('rainfall');
 		averageMonthRainfallConvertedDiv.text(averageMonthRainfallConverted);
+		averageMonthRainfallConvertedDiv.append(' in.')
 
-		var countryDollarPriceConvertedDiv = $('<div>');
-		
+		var countryDollarPriceConvertedDiv = $('<div>');	
 		countryDollarPriceConvertedDiv.addClass('big-mac-price');
-		countryDollarPriceConvertedDiv.text(countryDollarPriceConverted);
+		countryDollarPriceConvertedDiv.text("$")
+		countryDollarPriceConvertedDiv.append(countryDollarPriceConverted);
+		
+		imageDiv1 = $('<div>');
+		imageDiv1.append("<img id='image1' src='images/icon1.png' />")
+		imageDiv2 = $('<div>');
+		imageDiv2.append("<img id='image2' src='images/icon2.png' />")
+		imageDiv3 = $('<div>');
+		imageDiv3.append("<img id='image3' src='images/icon3.png' />")
+
+
 
     	$(cardDiv).addClass('card-div');
     	cardDiv.append(cityDiv);
     	cardDiv.append(countryDiv);
-    	cardDiv.append(exchangeRateConvertedDiv);
+    	cardDiv.append(imageDiv1);
+    	cardDiv.append(imageDiv2);
+    	cardDiv.append(imageDiv3);
+
+    	
   
-    	cardDiv.append(countryDollarPriceConvertedDiv);
+    	// cardDiv.append(countryDollarPriceConvertedDiv);
  
     	cardDiv.append(bigMacIndexConvertedDiv);
 
     	cardDiv.append(averageTempDiv);
 
     	cardDiv.append(averageMonthRainfallConvertedDiv)
+    	cardDiv.append(exchangeRateConvertedDiv);
     	$('#card-well').append(cardDiv);
 	}
 
