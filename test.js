@@ -275,6 +275,10 @@ $(document).ready(function() {
 	- The following 'handle' functions all handle what functions to execute when a drag listener is triggered happens.
 	- travelCard is a function that takes in all the previous data gathered from Firebase and the APIs and appends it to a 
 	cardDiv. 
+	- See link for drag and drop details: https://www.html5rocks.com/en/tutorials/dnd/basics/#toc-dragging-events
+		- WARNING: The event argument (e) from this link did not work as expected. I suspect this is because our event 
+		listener was made from jQuery. Instead of e.dataTransfer, I was forced to use e.originalEvent.dataTransfer. 
+		So watch out for jQuery leaks when following this guide!
 */
  
 
@@ -294,7 +298,7 @@ function handleDragOver(e) {
 	  e.preventDefault(); // Necessary. Allows us to drop.
 	}
   
-	e.originalEvent.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+	e.originalEvent.dataTransfer.dropEffect = 'move';  
   
 	return false;
 }
@@ -385,7 +389,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			
 			$(cardDiv).attr({'class':'card-div', 'draggable': true});
 			//Adding listeners for dragging and dropping divs. 
-			//See link for drag and drop details: https://www.html5rocks.com/en/tutorials/dnd/basics/#toc-dragging-events
+			
 			$(cardDiv).on('dragstart',handleDragStart);
 			$(cardDiv).on('dragenter',handleDragEnter);
 			$(cardDiv).on('dragleave', handleDragLeave);
