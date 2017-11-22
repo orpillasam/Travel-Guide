@@ -271,9 +271,15 @@ $(document).ready(function() {
 	 });
 });
 
-/*---------------------------------------Travel Card Functions----------------------------------- */
+/*---------------------------------------Travel Card Functions----------------------------------- 
+	- The following 'handle' functions all handle what functions to execute when a drag listener is triggered happens.
+	- travelCard is a function that takes in all the previous data gathered from Firebase and the APIs and appends it to a 
+	cardDiv. 
+*/
  
-var dragSrcEl;
+
+var dragSrcEl; //Global variable to store element data before being moved.
+
 function handleDragStart(e){
 	this.style.opacity = '0.4';
 
@@ -376,8 +382,10 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			imageDiv3.append("<img id='image3' src='images/icon3.png' draggable = 'false'/>")
 	
 	
-	
+			
 			$(cardDiv).attr({'class':'card-div', 'draggable': true});
+			//Adding listeners for dragging and dropping divs. 
+			//See link for drag and drop details: https://www.html5rocks.com/en/tutorials/dnd/basics/#toc-dragging-events
 			$(cardDiv).on('dragstart',handleDragStart);
 			$(cardDiv).on('dragenter',handleDragEnter);
 			$(cardDiv).on('dragleave', handleDragLeave);
