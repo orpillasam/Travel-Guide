@@ -387,7 +387,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 	
 	
 			
-			$(cardDiv).attr({'class':'card-div', 'draggable': true});
+			$(cardDiv).attr({'class':'card-div grabbable', 'draggable': true});
 			//Adding listeners for dragging and dropping divs. 
 			
 			$(cardDiv).on('dragstart',handleDragStart);
