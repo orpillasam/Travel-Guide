@@ -278,8 +278,15 @@ $(document).ready(function() {
 		$(this).closest('.card-div').remove()
 		console.log("remove button is clicked");
 	}));
+
+	//
+	$("body").on('click', '.travel-button', (function(){
+		window.open('https://travel.state.gov/content/passports/en/country.html', '_blank');
+		console.log("travel button is clicked");
+	}));
+
 });
-	
+	//script to add animations to elements that are clicked with animiate.css classes added to it
 	$.fn.extend({
 	    animateCss: function (animationName, callback) {
 	        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
@@ -410,12 +417,19 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			removeDiv.addClass('remove-button');
 			removeDiv.text('X');
 
+			var buttonDiv = $('<button>');
+			buttonDiv.append("<a href='https://travel.state.gov/content/passports/en/country.html'></a>");
+			buttonDiv.addClass('travel-button');
+
+			buttonDiv.text('Passport/Visa/Embassy Info');
+
+
 			iconDiv0 = $('<div>');
 			iconDiv0.append("<img id='icon0' src='assets/images/currency_exchange_icon.png' draggable = 'false' />")
 			iconDiv1 = $('<div>');
 			iconDiv1.append("<img id='icon1' src='assets/images/whole_burger_icon.png' draggable = 'false' />")
 			iconDiv2 = $('<div>');
-			iconDiv2.append("<img id='icon2' src='assets/images/weather_logo_outline.png' draggable = 'false'/>")
+			iconDiv2.append("<img id='icon2' src='assets/images/temperature_icon_white.png' draggable = 'false'/>")
 			iconDiv3 = $('<div>');
 			iconDiv3.append("<img id='icon3' src='assets/images/weather_logo_outline.png' draggable = 'false'/>")
 	
@@ -441,6 +455,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			cardDiv.append(iconDiv2);
 			cardDiv.append(iconDiv3);
 			cardDiv.append(removeDiv);
+			cardDiv.append(buttonDiv);
 	
 			// cardDiv.append(countryDollarPriceConvertedDiv);
 	 
