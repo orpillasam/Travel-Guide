@@ -285,7 +285,7 @@ $(document).ready(function() {
 
 	//
 	$("body").on('click', '.travel-button', (function(){
-		window.open('https://travel.state.gov/content/passports/en/country/' + countryConverted + '.html', '_blank');
+		window.open('https://travel.state.gov/content/passports/en/country/' + countryFullName + '.html', '_blank');
 		console.log("travel button is clicked");
 	}));
 
@@ -378,7 +378,8 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			var bigMacIndexConverted = Math.round(bigMacIndex * 100) / 100;
 	
 			var averageMonthRainfallConverted = Math.round(averageMonthRainfall * 100) / 100;
-	
+			
+			//converts city in first letter uppercase
 			var cityLower = city.toLowerCase();
 			var cityUpperCaseFirst = cityLower.charAt(0).toUpperCase() + cityLower.slice(1);
 	
@@ -424,8 +425,10 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			removeDiv.addClass('remove-button');
 			removeDiv.text('X');
 
-			var buttonDiv = $('<button>');
-			buttonDiv.append("<a href='https://travel.state.gov/content/passports/en/country.html'></a>");
+			var countryFullNameLower = countryFullName.toLowerCase();
+			var countryLink = "https://travel.state.gov/content/passports/en/country/" + countryFullNameLower + ".html"
+			var buttonDiv = $("<a href=" + countryLink + "></a>");
+			buttonDiv.append();
 			buttonDiv.addClass('travel-button');
 
 			buttonDiv.text('Passport/Visa/Embassy Info');

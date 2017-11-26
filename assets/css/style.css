@@ -161,11 +161,13 @@ body {
 	height: 40px;
 	color: white;
 	position: absolute;
-	color: blue;
+	color: black;
 	font-family: 'Ubuntu', sans-serif;
 	left: 30%;
-	
+	text-align: center;	
 	border: 3px solid #DCDCDC;
+	background: white;
+	line-height: 40px;
 }
 /*---------------Remove Button styling -----------------*/
 label {
