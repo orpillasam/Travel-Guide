@@ -54,6 +54,8 @@ $(document).ready(function() {
 								"AU": "AUS", "AT": "AUT", "AW": "ABW", "IN": "IND", "AX": "ALA", "AZ": "AZE", 
 								"IE": "IRL", "ID": "IDN", "UA": "UKR", "QA": "QAT", "MZ": "MOZ"};
 
+
+
 	/*---------------------------Step 1 ------------------------------------
 	-	API functionality for populating the search box
 		- Autocomplete request/response expectations: https://stackoverflow.com/questions/5077409/what-does-autocomplete-request-server-response-look-like
@@ -109,7 +111,7 @@ $(document).ready(function() {
 
 			// PART 2: Run the info through our APIs and show desired values.
 
-	function getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth){
+	function getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName){
 
     	//needs a valid city name input   
    		var queryURL = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=1814235921e94fd2998195653171511&q=" + city + "&format=json&mca=yes&showmap=yes"
@@ -123,16 +125,13 @@ $(document).ready(function() {
            //var selectedMonth is a user input. needs to be an index #, 0-11.
 
         //minimum temperature of the selected month in input city
-          var minTemp = (results[selectedMonth].avgMinTemp_F);
-          
+          var minTemp = (results[selectedMonth].avgMinTemp_F);       
 
           //maximum temperature of the selected month in input city
-          var maxTemp = (results[selectedMonth].absMaxTemp_F);
-          
+          var maxTemp = (results[selectedMonth].absMaxTemp_F);         
 
           //average daily rainfall in selected month in input city, in milimeters
-          var averageDailyRainfall = (results[selectedMonth].avgDailyRainfall);
-          
+          var averageDailyRainfall = (results[selectedMonth].avgDailyRainfall);   
 
           //coverts the average rainfall into inches. *(days in a month) /(milimeters in a inch)
           var averageMonthRainfall = averageDailyRainfall * 30 / 25.4;
@@ -148,11 +147,11 @@ $(document).ready(function() {
 		  var averageDailyRainfall = (results[selectedMonth].avgDailyRainfall);
 		  var averageMonthRainfall = averageDailyRainfall * 30 / 25.4; //coverts the average rainfall into inches. *(days in a month) /(milimeters in a inch)
 		  
-		  travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, averageTemp, averageMonthRainfall);
+		  travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName);
         }); 
     }
     
-    function getBicMacIndex(exchangeRate, currency, country, city, selectedMonth) {
+    function getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName) {
       	//ALERT - will need to change the var country to the country code. will need to put info a country object
     	var queryURL = "https://www.quandl.com/api/v3/datasets/ECONOMIST/BIGMAC_" + country + "?start_date=2017-07-31&end_date=2017-07-31&api_key=9TGtJzuQxqvJizpJDPXX"
             
@@ -169,16 +168,15 @@ $(document).ready(function() {
           //the cost of a big mac in the input country, in USD
           var countryDollarPrice = countryPrice / exchangeRate;
           
-
           // the USA big mac price divided by the big mac price in the input country 
           var bigMacIndex = bigMacUSD / countryDollarPrice;
           
-		  getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth);
+		  getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName);
         });
 
     }
 
-    function getCurrentExchangeRate(currency, country, city, selectedMonth) { 
+    function getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName) { 
 
    		var queryURL = "https://v3.exchangerate-api.com/bulk/4b0db198bb26ff6f36044583/USD"
         
@@ -195,14 +193,15 @@ $(document).ready(function() {
           var exchangeRate = results[currency];  
           console.log('exchange rate is' + exchangeRate);
 
-          getBicMacIndex(exchangeRate, currency, country, city, selectedMonth); //We must call getBigMac here because we need the exchange rate after exchange rate is called.
+          getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName); //We must call getBigMac here because we need the exchange rate after exchange rate is called.
 
         });
      }
 
-	function displayValues(currency, country, city, selectedMonth){
+	function displayValues(currency, country, city, selectedMonth, countryFullName){
 		//Functions called after each done... to make it synchronous.
-		getCurrentExchangeRate(currency, country, city, selectedMonth);
+		getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName);
+		console.log(countryFullName);
 		
 	} 
 
@@ -213,8 +212,10 @@ $(document).ready(function() {
 		var dataCountry = childSnapshot.val().countryName;
 		var dataCity = childSnapshot.val().cityName;
 		var dataMonth = childSnapshot.val().month;
+		var dataCountryFullName = childSnapshot.val().countryFullName;
+		console.log("dataCountryFullName is " + dataCountryFullName);
 
-		displayValues(dataCurrency,dataCountry,dataCity,dataMonth);
+		displayValues(dataCurrency,dataCountry,dataCity,dataMonth,dataCountryFullName);
 		
 
 	});
@@ -235,12 +236,14 @@ $(document).ready(function() {
           console.log(data);
           var countryiso2 = data.geobytesinternet;
           var countryiso3 = countryCodeConversion[countryiso2];
+          var countryFullName = data.geobytescountry;
 
     	  var city = data.geobytescity.toUpperCase();
     	  var country = countryiso3;
 		  var currency = data.geobytescurrencycode;
 		  
 		  var userSearch = {
+		  	countryFullName:countryFullName,
 			currency:currency,
 			countryName:country,
 			cityName:city,
@@ -263,6 +266,7 @@ $(document).ready(function() {
 	 	if($('#f_elem_city').val() != "" && selectedMonth != ""){
 	 		var cityValues = $('#f_elem_city').val().trim(); //Gets a city in format: City, State Initials, Country
 	 		getRequiredInfo(cityValues, selectedMonth); 		
+	 		console.log("city values is " + cityValues);
 	 		$('#f_elem_city').val("");
 			 $('#month-input').val("");
 			 
@@ -281,7 +285,7 @@ $(document).ready(function() {
 
 	//
 	$("body").on('click', '.travel-button', (function(){
-		window.open('https://travel.state.gov/content/passports/en/country.html', '_blank');
+		window.open('https://travel.state.gov/content/passports/en/country/' + countryConverted + '.html', '_blank');
 		console.log("travel button is clicked");
 	}));
 
@@ -360,7 +364,7 @@ function handleDragEnd(e) {
 	this.classList.remove('over');
 }
 function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, 
-					country, city, selectedMonth, averageTemp, averageMonthRainfall){
+					country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName){
 	
 			var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 			var cardDiv = $('<div>');
@@ -375,14 +379,17 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 	
 			var averageMonthRainfallConverted = Math.round(averageMonthRainfall * 100) / 100;
 	
+			var cityLower = city.toLowerCase();
+			var cityUpperCaseFirst = cityLower.charAt(0).toUpperCase() + cityLower.slice(1);
 	
 			var cityDiv = $('<div>');
 			cityDiv.addClass('city');
-			cityDiv.append(city);
+			cityDiv.append(cityUpperCaseFirst);
 	
 			var countryDiv = $('<div>');
 			countryDiv.addClass('country');
-			countryDiv.append(country);
+			countryDiv.append(countryFullName);
+			console.log("country full name is " + countryFullName);
 
 			var monthDiv = $('<div>');
 			monthDiv.addClass('month');
