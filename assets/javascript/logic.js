@@ -358,7 +358,9 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 	
 			var countryDollarPriceConverted = Math.round(countryDollarPrice * 100) / 100;
 			$(countryDollarPriceConverted).addClass('big-mac-price');
-			var bigMacIndexConverted = Math.round(bigMacIndex * 100) / 100;
+
+			// Always show at least two digits, as a floating number (for site consistency).
+			var bigMacIndexConverted = parseFloat(Math.round(bigMacIndex * 100) / 100).toFixed(2);
 	
 			var averageMonthRainfallConverted = Math.round(averageMonthRainfall * 100) / 100;
 			
@@ -420,11 +422,11 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			iconDiv0 = $('<div>');
 			iconDiv0.append("<img id='icon0' src='assets/images/currency_exchange_icon.png' draggable = 'false' />")
 			iconDiv1 = $('<div>');
-			iconDiv1.append("<img id='icon1' src='assets/images/whole_burger_icon.png' draggable = 'false' />")
+			iconDiv1.append("<img id='icon1' src='assets/images/Burger_icon_white.png' draggable = 'false' />")
 			iconDiv2 = $('<div>');
-			iconDiv2.append("<img id='icon2' src='assets/images/temperature_icon_white.png' draggable = 'false'/>")
+			iconDiv2.append("<img id='icon2' src='assets/images/weather_logo_1.png' draggable = 'false'/>")
 			iconDiv3 = $('<div>');
-			iconDiv3.append("<img id='icon3' src='assets/images/weather_logo_outline.png' draggable = 'false'/>")
+			iconDiv3.append("<img id='icon3' src='assets/images/temperature_icon_white.png' draggable = 'false'/>")
 	
 	
 			
