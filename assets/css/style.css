@@ -5,6 +5,7 @@
 }
 body {
 	background: url('../images/background-image.jpeg') no-repeat center center fixed; 
+	background: linear-gradient(rgba(0,0,0,0.2),#87CEFA 87%),url(../images/background-image.jpeg);
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
