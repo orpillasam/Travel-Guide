@@ -65,7 +65,7 @@ $(document).ready(function() {
 	 $("#f_elem_city").autocomplete({
 		source: function (request, response) {
 		 $.getJSON(
-		 	"http://gd.geobytes.com/AutoCompleteCity?callback=?&q=" + request.term,
+		 	"https://gd.geobytes.com/AutoCompleteCity?callback=?&q=" + request.term,
 			// "http://free.rome2rio.com/api/1.4/json/Autocomplete?key=7slkssQD&query="+request.term,
 			function (data) {
 			// var placesArray = [];
@@ -226,7 +226,7 @@ $(document).ready(function() {
 			// 4. The selected month	(Get through user input)
 
 	 function getRequiredInfo(cityValues, selectedMonth){
-	 	var queryURL = "http://gd.geobytes.com/GetCityDetails?callback=?&fqcn=" + cityValues;
+	 	var queryURL = "https://gd.geobytes.com/GetCityDetails?callback=?&fqcn=" + cityValues;
 	 	// var queryURL = "http://free.rome2rio.com/api/1.4/json/Search?key=7slkssQD&oName=" + country + "&dName=" + country;
 	 	$.ajax({
 	 	  dataType: "json", //Some APIs don't know what datatype to return unless you tell them to!
