@@ -5,7 +5,7 @@
 }
 body {
 	background: url('../images/background-image.jpeg') no-repeat center center fixed; 
-	background: linear-gradient(rgba(0,0,0,0.2),#87CEFA 87%),url(../images/background-image.jpeg);
+	background: linear-gradient(rgba(0,0,0,0.2),#E0FFFF 87%),url(../images/background-image.jpeg);
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -183,6 +183,9 @@ label {
 	color: white;
 }
 
+btn btn-outline-primary {
+	top:39px;
+}
 .remove-button {
 	width: 25px;
 	height: 25px;
