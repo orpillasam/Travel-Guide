@@ -174,7 +174,8 @@ $(document).ready(function() {
 
     function getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName) { 
 
-   		var queryURL = "https://v3.exchangerate-api.com/bulk/4b0db198bb26ff6f36044583/USD"
+		// var queryURL = "https://v3.exchangerate-api.com/bulk/4b0db198bb26ff6f36044583/USD"
+		var queryURL = "https://v3.exchangerate-api.com/bulk/8e7d9587b452200d942573dd/USD";
         
         $.ajax({
           url: queryURL,
