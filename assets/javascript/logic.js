@@ -420,13 +420,13 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 
 
 			iconDiv0 = $('<div>');
-			iconDiv0.append("<img id='icon0' src='assets/images/currency_exchange_icon.png' draggable = 'false' />")
+			iconDiv0.append("<img id='icon0' src='assets/images/final_currency.png' draggable = 'false' />")
 			iconDiv1 = $('<div>');
-			iconDiv1.append("<img id='icon1' src='assets/images/Burger_icon_white.png' draggable = 'false' />")
+			iconDiv1.append("<img id='icon1' src='assets/images/final_burger.png' draggable = 'false' />")
 			iconDiv2 = $('<div>');
-			iconDiv2.append("<img id='icon2' src='assets/images/temperature_icon_white.png' draggable = 'false'/>")
+			iconDiv2.append("<img id='icon2' src='assets/images/final_temperature.png' draggable = 'false'/>")
 			iconDiv3 = $('<div>');
-			iconDiv3.append("<img id='icon3' src='assets/images/weather_logo_1.png' draggable = 'false'/>")
+			iconDiv3.append("<img id='icon3' src='assets/images/final_rainfall.png' draggable = 'false'/>")
 	
 	
 			
