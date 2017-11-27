@@ -134,14 +134,11 @@ $(document).ready(function() {
 
           //coverts the average rainfall into inches. *(days in a month) /(milimeters in a inch)
           var averageMonthRainfall = averageDailyRainfall * 30 / 25.4;
-          
-		  
-		 
+         
 		  var minTempNumber = parseInt(minTemp);
 		  var maxTempNumber = parseInt(maxTemp);
 		  
-		  var averageTemp = (minTempNumber + maxTempNumber) / 2;
-		 
+		  var averageTemp = (minTempNumber + maxTempNumber) / 2;		 
 		  
 		  var averageDailyRainfall = (results[selectedMonth].avgDailyRainfall);
 		  var averageMonthRainfall = averageDailyRainfall * 30 / 25.4; //coverts the average rainfall into inches. *(days in a month) /(milimeters in a inch)
@@ -184,8 +181,7 @@ $(document).ready(function() {
           method: "GET"
         }).done(function(response) {
           console.log(response);
-          var results = response.rates;
-            
+          var results = response.rates;       
 
             //currently using the currency input field, but we will put each country in an object and call the currency from there
             //and we will call the currency code of the selected country
@@ -199,21 +195,17 @@ $(document).ready(function() {
 
 	function displayValues(currency, country, city, selectedMonth, countryFullName){
 		//Functions called after each done... to make it synchronous.
-		getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName);
-		
-		
+		getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName);			
 	} 
 
 	database.ref().on('child_added',function(childSnapshot){
 		
-	
 		var dataCurrency = childSnapshot.val().currency;
 		var dataCountry = childSnapshot.val().countryName;
 		var dataCity = childSnapshot.val().cityName;
 		var dataMonth = childSnapshot.val().month;
 		var dataCountryFullName = childSnapshot.val().countryFullName;
 		
-
 		displayValues(dataCurrency,dataCountry,dataCity,dataMonth,dataCountryFullName);
 		
 
@@ -279,12 +271,6 @@ $(document).ready(function() {
 	//Script to remove the card element by clicking the 'X'
 	$("body").on('click', '.remove-button', (function(){
 		$(this).closest('.card-div').remove()
-		
-	}));
-
-	//
-	$("body").on('click', '.travel-button', (function(){
-		window.open('https://travel.state.gov/content/passports/en/country/' + countryFullName + '.html', '_blank');
 		
 	}));
 
@@ -366,9 +352,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 	
 			var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 			var cardDiv = $('<div>');
-			
-	
-			
+					
 			var exchangeRateConverted = Math.round(exchangeRate * 100) / 100;
 	
 			var countryDollarPriceConverted = Math.round(countryDollarPrice * 100) / 100;
@@ -475,4 +459,3 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			cardDiv.append(exchangeRateConvertedDiv);
 			$('#card-well').append(cardDiv);
 		}
-
