@@ -399,7 +399,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			var averageMonthRainfallConvertedDiv = $('<div>');
 			averageMonthRainfallConvertedDiv.addClass('rainfall');
 			averageMonthRainfallConvertedDiv.text(averageMonthRainfallConverted);
-			averageMonthRainfallConvertedDiv.append(' in.')
+			averageMonthRainfallConvertedDiv.append(' in')
 	
 			var countryDollarPriceConvertedDiv = $('<div>');	
 			countryDollarPriceConvertedDiv.addClass('big-mac-price');
