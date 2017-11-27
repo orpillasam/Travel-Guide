@@ -136,12 +136,12 @@ $(document).ready(function() {
           var averageMonthRainfall = averageDailyRainfall * 30 / 25.4;
           
 		  
-		  console.log('finding average temp');
+		 
 		  var minTempNumber = parseInt(minTemp);
 		  var maxTempNumber = parseInt(maxTemp);
 		  
 		  var averageTemp = (minTempNumber + maxTempNumber) / 2;
-		  console.log(averageTemp);
+		 
 		  
 		  var averageDailyRainfall = (results[selectedMonth].avgDailyRainfall);
 		  var averageMonthRainfall = averageDailyRainfall * 30 / 25.4; //coverts the average rainfall into inches. *(days in a month) /(milimeters in a inch)
@@ -185,12 +185,12 @@ $(document).ready(function() {
         }).done(function(response) {
           console.log(response);
           var results = response.rates;
-            console.log("country currency " + currency);
+            
 
             //currently using the currency input field, but we will put each country in an object and call the currency from there
             //and we will call the currency code of the selected country
           var exchangeRate = results[currency];  
-          console.log('exchange rate is' + exchangeRate);
+          
 
           getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName); //We must call getBigMac here because we need the exchange rate after exchange rate is called.
 
@@ -200,19 +200,19 @@ $(document).ready(function() {
 	function displayValues(currency, country, city, selectedMonth, countryFullName){
 		//Functions called after each done... to make it synchronous.
 		getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName);
-		console.log(countryFullName);
+		
 		
 	} 
 
 	database.ref().on('child_added',function(childSnapshot){
-		console.log(childSnapshot.val());
+		
 	
 		var dataCurrency = childSnapshot.val().currency;
 		var dataCountry = childSnapshot.val().countryName;
 		var dataCity = childSnapshot.val().cityName;
 		var dataMonth = childSnapshot.val().month;
 		var dataCountryFullName = childSnapshot.val().countryFullName;
-		console.log("dataCountryFullName is " + dataCountryFullName);
+		
 
 		displayValues(dataCurrency,dataCountry,dataCity,dataMonth,dataCountryFullName);
 		
@@ -265,7 +265,7 @@ $(document).ready(function() {
 	 	if($('#f_elem_city').val() != "" && selectedMonth != ""){
 	 		var cityValues = $('#f_elem_city').val().trim(); //Gets a city in format: City, State Initials, Country
 	 		getRequiredInfo(cityValues, selectedMonth); 		
-	 		console.log("city values is " + cityValues);
+	 		
 	 		$('#f_elem_city').val("");
 			 $('#month-input').val("");
 			 
@@ -279,13 +279,13 @@ $(document).ready(function() {
 	//Script to remove the card element by clicking the 'X'
 	$("body").on('click', '.remove-button', (function(){
 		$(this).closest('.card-div').remove()
-		console.log("remove button is clicked");
+		
 	}));
 
 	//
 	$("body").on('click', '.travel-button', (function(){
 		window.open('https://travel.state.gov/content/passports/en/country/' + countryFullName + '.html', '_blank');
-		console.log("travel button is clicked");
+		
 	}));
 
 });
@@ -320,7 +320,6 @@ var dragSrcEl; //Global variable to store element data before being moved.
 function handleDragStart(e){
 	this.style.opacity = '0.4';
 
-	console.log(e);
 	dragSrcEl = this;
 	e.originalEvent.dataTransfer.effectAllowed = 'move';
 	e.originalEvent.dataTransfer.setData('text/html', this.innerHTML);
@@ -367,9 +366,9 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 	
 			var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 			var cardDiv = $('<div>');
-			console.log(currency);
+			
 	
-			console.log('average temp is ' + averageTemp);
+			
 			var exchangeRateConverted = Math.round(exchangeRate * 100) / 100;
 	
 			var countryDollarPriceConverted = Math.round(countryDollarPrice * 100) / 100;
@@ -389,7 +388,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			var countryDiv = $('<div>');
 			countryDiv.addClass('country');
 			countryDiv.append(countryFullName);
-			console.log("country full name is " + countryFullName);
+			
 
 			var monthDiv = $('<div>');
 			monthDiv.addClass('month');
