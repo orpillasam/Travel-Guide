@@ -54,11 +54,10 @@ body {
 }
 
 #nc-submit-city{
-	margin-top: 42px;
-	background-color: #1E90FF;
-	color: black;
-	border-radius: 4px;
-	height: 38px;
+	margin-top: 39px;
+	text-align: center;
+	color: 000000;
+
 }
 /* ---------------------End of Search bar area elements -----------------------*/
 
