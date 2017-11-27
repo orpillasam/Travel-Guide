@@ -67,7 +67,7 @@ $(document).ready(function () {
 	$("#f_elem_city").autocomplete({
 		source: function (request, response) {
 			$.getJSON(
-				"https://gd.geobytes.com/AutoCompleteCity?callback=?&q=" + request.term,
+				"http://gd.geobytes.com/AutoCompleteCity?callback=?&q=" + request.term,
 				function (data) {
 					// var placesArray = [];
 					// for(let i = 0; i<data.places.length; i++){
@@ -112,7 +112,7 @@ $(document).ready(function () {
 
 	// PART 2: Run the info through our APIs and show desired values.
 
-	function getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName) {
+	function getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName, dataId) {
 
 		//needs a valid city name input   
 		var queryURL = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=1814235921e94fd2998195653171511&q=" + city + "&format=json&mca=yes&showmap=yes"
@@ -148,11 +148,11 @@ $(document).ready(function () {
 			var averageDailyRainfall = (results[selectedMonth].avgDailyRainfall);
 			var averageMonthRainfall = averageDailyRainfall * 30 / 25.4; //coverts the average rainfall into inches. *(days in a month) /(milimeters in a inch)
 
-			travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName);
+			travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName, dataId);
 		});
 	}
 
-	function getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName) {
+	function getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName, dataId) {
 		//ALERT - will need to change the var country to the country code. will need to put info a country object
 		var queryURL = "https://www.quandl.com/api/v3/datasets/ECONOMIST/BIGMAC_" + country + "?start_date=2017-07-31&end_date=2017-07-31&api_key=9TGtJzuQxqvJizpJDPXX"
 
@@ -172,12 +172,12 @@ $(document).ready(function () {
 			// the USA big mac price divided by the big mac price in the input country 
 			var bigMacIndex = bigMacUSD / countryDollarPrice;
 
-			getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName);
+			getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName, dataId);
 		});
 
 	}
 
-	function getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName) {
+	function getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName, dataId) {
 
 		// var queryURL = "https://v3.exchangerate-api.com/bulk/4b0db198bb26ff6f36044583/USD"
 		var queryURL = "https://v3.exchangerate-api.com/bulk/8e7d9587b452200d942573dd/USD";
@@ -195,29 +195,30 @@ $(document).ready(function () {
 			var exchangeRate = results[currency];
 
 
-			getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName); //We must call getBigMac here because we need the exchange rate after exchange rate is called.
+			getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName, dataId); //We must call getBigMac here because we need the exchange rate after exchange rate is called.
 
 		});
 	}
 
-	function displayValues(currency, country, city, selectedMonth, countryFullName) {
+	function displayValues(currency, country, city, selectedMonth, countryFullName, dataId) {
 		//Functions called after each done... to make it synchronous.
-		getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName);
+		getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName, dataId);
 
 
 	}
 
 	database.ref().on('child_added', function (childSnapshot) {
-
+		console.log(childSnapshot);
 
 		var dataCurrency = childSnapshot.val().currency;
 		var dataCountry = childSnapshot.val().countryName;
 		var dataCity = childSnapshot.val().cityName;
 		var dataMonth = childSnapshot.val().month;
 		var dataCountryFullName = childSnapshot.val().countryFullName;
+		var dataId = childSnapshot.key;
 
 
-		displayValues(dataCurrency, dataCountry, dataCity, dataMonth, dataCountryFullName);
+		displayValues(dataCurrency, dataCountry, dataCity, dataMonth, dataCountryFullName, dataId);
 
 
 	});
@@ -228,7 +229,7 @@ $(document).ready(function () {
 	// 4. The selected month	(Get through user input)
 
 	function getRequiredInfo(cityValues, selectedMonth) {
-		var queryURL = "https://gd.geobytes.com/GetCityDetails?callback=?&fqcn=" + cityValues;
+		var queryURL = "http://gd.geobytes.com/GetCityDetails?callback=?&fqcn=" + cityValues;
 
 		$.ajax({
 			dataType: "json", //Some APIs don't know what datatype to return unless you tell them to!
@@ -281,8 +282,10 @@ $(document).ready(function () {
 
 	//Script to remove the card element by clicking the 'X'
 	$("body").on('click', '.remove-button', (function () {
-		$(this).closest('.card-div').remove()
-
+		console.log($(this).attr('data-id'));
+		var idToRemove = $(this).attr('data-id');
+		database.ref().child(idToRemove).remove();
+		$(this).closest('.card-div').remove();
 	}));
 
 	//
@@ -365,7 +368,7 @@ function handleDragEnd(e) {
 	this.classList.remove('over');
 }
 function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
-	country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName) {
+	country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName, dataId) {
 
 	var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 	var cardDiv = $('<div>');
@@ -424,6 +427,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 
 	var removeDiv = $('<button>')
 	removeDiv.addClass('remove-button');
+	removeDiv.attr('data-id', dataId);
 	removeDiv.text('X');
 
 	var countryFullNameLower = countryFullName.toLowerCase();
@@ -431,7 +435,6 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 	var buttonDiv = $("<a href=" + countryLink + "></a>");
 	buttonDiv.append();
 	buttonDiv.addClass('travel-button');
-
 	buttonDiv.text('Passport/Visa/Embassy Info');
 
 
