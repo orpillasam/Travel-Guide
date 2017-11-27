@@ -6,12 +6,10 @@
 
 
 body {
-	background: linear-gradient(rgba(0,0,0,0.2),#E0FFFF 87%), url(../images/background-image.jpeg);
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
+	background: linear-gradient(rgba(0,0,0,0.2),#AFEEEE 87%), url(../images/background-image.jpeg);
 	background-size: cover;
 	background-repeat: no-repeat;
+	background-attachment: fixed;
 	height: 100%;
 	width: 100%;
 	margin: 0px;
@@ -46,7 +44,7 @@ body {
 #logo-main {
 	position: relative;
 	width: 300px;
-	left: 40%;
+	left: 35%;
 }
 
 #search-bar-row {
@@ -285,5 +283,25 @@ label {
     border-width: 5px;
     border-style: solid;
     border-color: #555 transparent transparent transparent;
+}
+
+.directory-icons {
+  display:flex;
+  align-items: center;
+  padding-left: 50px;
+ 
+  }
+.directory-icons div {
+  flex:1;
+
+/* need some space ?*/
+  }
+
+img {
+  width:70%;
+  }
+img:hover {
+opacity: 0;
+transition: opacity 2s;
 }
 
