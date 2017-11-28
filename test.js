@@ -10,6 +10,7 @@ $(document).ready(function () {
 	};
 	firebase.initializeApp(config);
 	var database = firebase.database();
+	var provider = new firebase.auth.GoogleAuthProvider();
 
 	var countryCodeConversion = {
 		"BD": "BGD", "BE": "BEL", "BF": "BFA", "BG": "BGR", "BA": "BIH",
@@ -55,7 +56,25 @@ $(document).ready(function () {
 		"AU": "AUS", "AT": "AUT", "AW": "ABW", "IN": "IND", "AX": "ALA", "AZ": "AZE",
 		"IE": "IRL", "ID": "IDN", "UA": "UKR", "QA": "QAT", "MZ": "MOZ"
 	};
-
+	/*-------------------------------------------------------Testing Authentication Here ------------------------------------------------------*/
+	firebase.auth().signInWithPopup(provider).then(function (result) {
+		// This gives you a Google Access Token. You can use it to access the Google API.
+		var token = result.credential.accessToken;
+		console.log(token);
+		// The signed-in user info.
+		var user = result.user;
+		console.log(user);
+		// ...
+	}).catch(function (error) {
+		// Handle Errors here.
+		var errorCode = error.code;
+		var errorMessage = error.message;
+		// The email of the user's account used.
+		var email = error.email;
+		// The firebase.auth.AuthCredential type that was used.
+		var credential = error.credential;
+		// ...
+	});
 
 
 	/*---------------------------Step 1 ------------------------------------
@@ -115,7 +134,8 @@ $(document).ready(function () {
 	function getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName, dataId) {
 
 		//needs a valid city name input   
-		var queryURL = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=1814235921e94fd2998195653171511&q=" + city + "&format=json&mca=yes&showmap=yes"
+		// var queryURL = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=1814235921e94fd2998195653171511&q=" + city + "&format=json&mca=yes&showmap=yes";
+		var queryURL = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=2fd80d1e79764c9fa97194027172711&q=" + city + "&format=json&mca=yes&showmap=yes";
 
 		$.ajax({
 			url: queryURL,

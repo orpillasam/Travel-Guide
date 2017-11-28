@@ -115,7 +115,8 @@ $(document).ready(function () {
 	function getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName, dataId) {
 
 		//needs a valid city name input   
-		var queryURL = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=1814235921e94fd2998195653171511&q=" + city + "&format=json&mca=yes&showmap=yes"
+		// var queryURL = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=1814235921e94fd2998195653171511&q=" + city + "&format=json&mca=yes&showmap=yes";
+		var queryURL = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=2fd80d1e79764c9fa97194027172711&q=" + city + "&format=json&mca=yes&showmap=yes";
 
 		$.ajax({
 			url: queryURL,
