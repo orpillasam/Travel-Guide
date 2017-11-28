@@ -43,6 +43,7 @@ body {
 	/*padding-left: 25px;*/
 	
 }
+
 /* -------------------End of Header elements ------------------- */
 
 
@@ -51,16 +52,19 @@ body {
 
 /* large logo in the middle */
 #logo-main {
-
 	position: relative;
-	width: 30%;
+	width: 25%;
 	display: block;
   	margin: 0 auto;
+}
+#logo-row p {
+	font-size: 20px;
+	text-align: center;
+	color: white;
 }
 
 #search-bar-row {
 	margin: 10px 0 0 30px;
-
 }
 
 div.search-bars {
@@ -71,8 +75,6 @@ div.search-bars {
 	padding-top: 20px;
 	border-radius: 3px;
 }
-
-
 
 #nc-submit-city{
 	opacity: 1;
@@ -326,6 +328,7 @@ label {
   height: 100%;
   border-radius: 15px;
   position: relative;
+  padding-top: 15px;
 
 /*  padding-left: 65px;*/
 
@@ -347,6 +350,7 @@ label {
   }
 
  .icon-card {
+ 	margin-top: 10px;
  	background-color: #778899;
  	border-radius: 15px;
  	border: 3px solid #DCDCDC;
@@ -357,7 +361,7 @@ label {
  }
 
 .directory-icon-container h3 {
-	margin-top: 5px;
+	margin-top: 10px;
 	font-size: 22px;
 
 	text-align: center;
