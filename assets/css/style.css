@@ -285,10 +285,14 @@ label {
     border-color: #555 transparent transparent transparent;
 }
 
+
+/*---------------Bottom Icons Cards ---------------------*/
+
 .directory-icons {
   display:flex;
   align-items: center;
-  padding-left: 65px;
+/*  padding-left: 65px;*/
+
  
   }
 .directory-icons div {
@@ -301,4 +305,12 @@ img {
 
   }
 
+ .icon-card {
+ 	background-color: blue;
+ 	border-radius: 15px;
+ 	height: 250px;
+ 	margin: 5px;
+
+
+ }
 
