@@ -128,6 +128,7 @@ body {
 	left: 60%;
 }
 
+
 #icon0, #icon1, #icon2, #icon3 {
 	width: 70px;
 	height: auto;
@@ -218,12 +219,12 @@ label {
 	color: black;
 	font-family: 'Ubuntu', sans-serif;
 /*	font-size: 30px;*/
-	width: 1100px;
+	width: 100%;
 	height: 120px;
 	border: 3px solid #DCDCDC;
-	border-radius: 8px;
+	border-radius: 10px;
 	background-color: #778899;
-	margin: 10px;
+	margin-bottom: 10px;
 }
 .card-div.over {
 	border: 4px dashed #000;
@@ -249,7 +250,7 @@ label {
 }*/
 
 .tooltip {
-	top:9%;
+	top: 9%;
 	left: 60%;
 	width: 70px;
 	height: 70px;
@@ -288,29 +289,54 @@ label {
 
 /*---------------Bottom Icons Cards ---------------------*/
 
-.directory-icons {
+.directory-icon-container {
   display:flex;
   align-items: center;
+  height: 100%;
+  margin-top: 50px;
+
 /*  padding-left: 65px;*/
 
- 
-  }
-.directory-icons div {
+ }
+
+.directory-icon-container div {
   flex:1;
 
   }
 
-img {
-  width:70%;
+.directory-icon {
+	margin-top: 10px;
+  	width:40%;
+  	display: block;
+  	margin: 0 auto;
+  	
+  	
 
   }
 
  .icon-card {
- 	background-color: blue;
+ 	background-color: #778899;
  	border-radius: 15px;
- 	height: 250px;
- 	margin: 5px;
-
+ 	border: 3px solid #DCDCDC;
+ 	height: 300px;
+ 	
 
  }
 
+.directory-icon-container h3 {
+	margin-top: 5px;
+	font-size: 22px;
+
+	text-align: center;
+	position: relative;
+	color: white;
+}
+
+.directory-icon-container p {
+	margin: 10px 5px 5px 5px;
+	font-size: 14px;
+	
+	text-align: center;
+	position: relative;
+	color: white;
+}
