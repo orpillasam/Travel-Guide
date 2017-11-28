@@ -420,7 +420,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			buttonDiv.append();
 			buttonDiv.addClass('travel-button');
 
-			buttonDiv.text('Passport/Visa/Embassy Info');
+			buttonDiv.text('More Travel Info >>');
 
 
 			iconDiv0 = $('<div>');
