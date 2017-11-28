@@ -6,7 +6,7 @@
 
 
 body {
-	background: linear-gradient(rgba(0,0,0,0.2),#AFEEEE 87%), url(../images/background-image.jpeg);
+	background: linear-gradient(rgba(0,0,0,0.2),#AFEEEE 95%), url(../images/background-image.jpeg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -34,6 +34,25 @@ body {
 	padding-left: 25px;
 	
 }
+
+#logo-row h5 {
+	padding-top: 10px;
+	font-family: 'Ubuntu';
+	text-align: center;
+	color: #343a40;
+	opacity: 0.7;
+	text-transform: capitalize;
+}
+
+#logo-row h6{
+	padding-top: 10px;
+	font-family: 'Ubuntu';
+	text-align: center;
+	color: #343a40;
+	opacity: 0.7;
+}
+
+
 /* -------------------End of Header elements ------------------- */
 
 
@@ -44,7 +63,7 @@ body {
 #logo-main {
 	position: relative;
 	width: 300px;
-	left: 35%;
+	left: 32%;
 }
 
 #search-bar-row {
@@ -140,7 +159,7 @@ body {
 }
 
 .temperature{
-	left: 80%;
+	left: 81%;
 }
 
  .rainfall{
@@ -163,25 +182,32 @@ body {
 
 #icon3{
 	top: 7%;
-	left: 90%;
+	left: 89%;
 }
 
+/*travel info button*/
 .travel-button {
-	bottom: 5%;
+    background-color: white;
+    color: black;
+    border: 2px solid #343a40;
+    border-radius: 7px;
+    bottom: 5%;
 	width: 250px;
 	height: 40px;
-	color: white;
 	position: absolute;
-	color: black;
 	font-family: 'Ubuntu', sans-serif;
 	left: 30%;
 	text-align: center;	
-	border: 3px solid #DCDCDC;
-	background: white;
+	/*border: 3px solid #DCDCDC;*/
 	line-height: 36px;
 }
 
-.travel-button:hover, .travelbutton:visited, .travelbutton:link {
+.travel-button:hover {
+    background-color: #343a40;
+    color: white;
+}
+
+.travelbutton:visited, .travelbutton:link {
 	color: black;
 	text-decoration: none;
 }
