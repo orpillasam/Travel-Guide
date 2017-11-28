@@ -1,0 +1,375 @@
+
+/*-------------Start of Body elements---------------------*/
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+	background: linear-gradient(rgba(0,0,0,0.2),#AFEEEE 87%), url(../images/background-image.jpeg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+}
+
+
+
+/*-------------End of Body elements---------------------*/
+
+
+/*--------------- Start of Header elements -------------------- */
+
+#main-header {
+	height: 40px;
+}
+.social-icon {
+	width: auto;
+	height: 100%;
+	margin: 10px 0 0 10px;
+}
+#social-icon-box {
+	  position: absolute;
+    right: 0px;
+    height: 40px;
+}
+
+/* small logo on top right */
+#logo {
+	width: auto;
+	height: 100%
+	/*padding-left: 25px;*/
+	
+}
+/* -------------------End of Header elements ------------------- */
+
+
+
+/* --------------------Start of Search bar area elements ---------------------*/
+
+/* large logo in the middle */
+#logo-main {
+
+	position: relative;
+	width: 30%;
+	display: block;
+  	margin: 0 auto;
+}
+
+#search-bar-row {
+	margin: 10px 0 0 30px;
+
+}
+
+div.search-bars {
+	background-color: black;
+	opacity: .78;
+	height: 150px;
+	width: 100%;
+	padding-top: 20px;
+	border-radius: 3px;
+}
+
+
+
+#nc-submit-city{
+	opacity: 1;
+	margin-top: 34px;
+	text-align: center;
+	color: 000000;
+	border: 0px #DCDCDC solid;
+	color: white;
+	background-color: #236B8E;
+}
+/* ---------------------End of Search bar area elements -----------------------*/
+
+
+
+/*-----------------Start of  styling for the elements inside the Card Div that is created in JS --------------------*/
+
+
+.location {
+	position: relative;
+	font-size: 24px;
+	width: 400px;
+	height: 100px;
+}
+
+.temperature, .big-mac-price, 
+.big-mac-index, .rainfall{
+/*	border: 2px solid black;
+	height: 40px;
+	width: 100px;*/
+	font-size: 25px;
+	display: inline-block;
+	position: absolute;
+	bottom: 2%;
+	text-align: center;
+}
+
+.city, .country {
+/*	border: 2px solid black;
+	margin: 10px;
+	height: 40px;
+	width: 200px;*/
+	font-size: 28px;
+	display: inline-block;
+	
+	position: absolute;
+	text-align: center;
+	top: 10%;
+}
+
+.month {
+	position: absolute;
+/*	border: 2px solid black;
+ 	margin: 5px;
+	height: 40px;
+	width: 200px;*/
+	font-size: 28px;
+	display: inline-block;
+	bottom: 5%;
+	text-align: center;
+	left: 5%;
+}
+.city {
+	left: 5%;
+}
+.country{
+	left: 30%;
+ }
+
+ .exchange-rate {
+	position: absolute;
+/*	border: 2px solid black;
+	margin: 5px;
+	height: 40px;
+	width: 200px;*/
+	font-size: 14px;
+	display: inline-block;
+	bottom: 2%;
+	text-align: center;
+	left: 60%;
+}
+
+
+#icon0, #icon1, #icon2, #icon3 {
+	width: 70px;
+	height: auto;
+	position: absolute;
+}
+
+.big-mac-index{
+	left: 70.75%;
+}
+
+.temperature{
+	left: 80%;
+}
+
+ .rainfall{
+	left: 90%;	
+ }
+
+#icon0{
+	top: 9%;
+	left: 60%;
+}
+#icon1{
+	top: 8%;
+	left: 70%;
+}
+
+#icon2{
+	top: 8%;
+	left: 80%
+}
+
+#icon3{
+	top: 7%;
+	left: 90%;
+}
+
+.travel-button {
+	bottom: 5%;
+	width: 250px;
+	height: 40px;
+	color: white;
+	position: absolute;
+	color: black;
+	font-family: 'Ubuntu', sans-serif;
+	left: 30%;
+	text-align: center;	
+	border: 3px solid #DCDCDC;
+	background: white;
+	line-height: 36px;
+}
+
+.travel-button:hover, .travelbutton:visited, .travelbutton:link {
+	color: black;
+	text-decoration: none;
+}
+/*---------------Remove Button styling -----------------*/
+label {
+	font-family: 'Ubuntu', sans-serif;
+	font-style: bold;
+	font-size: 18px;
+	color: white;
+}
+
+}
+.remove-button {
+	width: 25px;
+	height: 25px;
+	color: #777;
+	font: 14px/100% arial, sans-serif;
+	position: absolute;
+	right: 5px;
+	text-decoration: none;
+	text-shadow: 0 1px 0 #fff;
+	top: 5px;
+	content: 'X';
+}
+/*---------------Remove Button styling -----------------*/
+
+
+/* --------------End of elements inside the Card Div ---------------------------*/
+
+
+
+/*---------------Start of styling for the Card Div itself, as well as to make the card grabbable -------------*/
+.card-div{
+	position: relative;
+	color: black;
+	font-family: 'Ubuntu', sans-serif;
+/*	font-size: 30px;*/
+	width: 100%;
+	height: 120px;
+	border: 3px solid #DCDCDC;
+	border-radius: 10px;
+	background-color: #778899;
+	margin-bottom: 10px;
+}
+.card-div.over {
+	border: 4px dashed #000;
+}
+.grabbable{
+	cursor: move;
+	cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+.grabbable:active{
+	cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+/*---------------------end of styling for Card Div itself -------------------------------*/
+
+
+/*------------------tooltip popup styling. Still in progress---------------------------*/
+/*#icon0{
+	top: 9%;
+	left: 60%;
+}*/
+
+.tooltip {
+	top: 9%;
+	left: 60%;
+	width: 70px;
+	height: 70px;
+	position: absolute;
+	display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+
+/*---------------Bottom Icons Cards ---------------------*/
+
+
+
+.directory-icon-container {
+  display:flex;
+  align-items: center;
+  height: 100%;
+  margin-top: 50px;
+  background-color: white;
+  height: 100%;
+  border-radius: 15px;
+  position: relative;
+
+/*  padding-left: 65px;*/
+
+ }
+
+/*.directory-icon-container div {
+  flex:1;
+
+  }*/
+
+.directory-icon {
+	margin-top: 10px;
+  	width:40%;
+  	display: block;
+  	margin: 0 auto;
+  	
+  	
+
+  }
+
+ .icon-card {
+ 	background-color: #778899;
+ 	border-radius: 15px;
+ 	border: 3px solid #DCDCDC;
+ 	height: 300px;
+	position: absolute;
+	bottom: 0;
+
+ }
+
+.directory-icon-container h3 {
+	margin-top: 5px;
+	font-size: 22px;
+
+	text-align: center;
+	position: relative;
+	color: black;
+}
+
+.directory-icon-container p {
+	margin: 10px 5px 5px 5px;
+	font-size: 14px;
+	
+	text-align: center;
+	position: relative;
+	color: black;
+}
