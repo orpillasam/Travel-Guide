@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+
 body {
 	background: linear-gradient(rgba(0,0,0,0.2),#AFEEEE 87%), url(../images/background-image.jpeg);
 	background-size: cover;
@@ -14,14 +15,15 @@ body {
 	margin: 0px;
 }
 
+
+
 /*-------------End of Body elements---------------------*/
 
 
 /*--------------- Start of Header elements -------------------- */
 
 #main-header {
-	height: 50px;
-	margin-bottom: 10px;
+	height: 40px;
 }
 .social-icon {
 	width: auto;
@@ -29,7 +31,8 @@ body {
 	margin: 10px 0 0 10px;
 }
 #social-icon-box {
-
+	  position: absolute;
+    right: 0px;
     height: 40px;
 }
 
@@ -38,7 +41,7 @@ body {
 	width: auto;
 	height: 100%
 	/*padding-left: 25px;*/
-
+	
 }
 
 /* -------------------End of Header elements ------------------- */
@@ -54,55 +57,38 @@ body {
 	display: block;
   	margin: 0 auto;
 }
-
 #logo-row p {
 	font-size: 18px;
 	text-align: center;
 	color: white;
-	font-style: bold;
+
 }
 
 #search-bar-row {
-	margin: 10px 0px 0px 0px;
+	margin: 10px 0 0 20px;
 }
 
-/*.search-bar-text {
+/*#search-bars label {
 	padding-top: 10px;
-
-}
-*/
-/*.search-area {
-	padding-bottom: 10px;
 }*/
 div.search-bars {
 	background-color: black;
-	opacity: .8;
-	height: 140px;
+	opacity: .78;
+	height: 100%;
 	width: 100%;
-	padding: 20px;
+	padding: 20px -10px 20px -10px;
 	border-radius: 3px;
 	margin-bottom: 20px;
 }
 
 #nc-submit-city{
 	opacity: 1;
-	margin-top: 36px;
+	margin-top: 34px;
 	text-align: center;
 	color: 000000;
 	border: 0px #DCDCDC solid;
 	color: white;
 	background-color: #236B8E;
-}
-
-#nc-submit-city:hover {
-    background-color: #343a40;
-    color: white;
-    text-decoration: none;
-}
-
-#nc-submit-city:visited, #nc-submit-city:link {
-	color: black;
-	text-decoration: none;
 }
 /* ---------------------End of Search bar area elements -----------------------*/
 
@@ -110,111 +96,154 @@ div.search-bars {
 
 /*-----------------Start of  styling for the elements inside the Card Div that is created in JS --------------------*/
 
-.city {
-	margin-top: 4px;
-	font-size: 18px;
-	text-align: left;
-	border-left: 1px solid #333333;
-	/*border-bottom: 1px solid #333333;*/
-	margin-left: 15px;
-/*	background-color: #1a1a1a;*/
-	/*margin-right: 20px;
-	vertical-align: bottom;*/
-}
 
-.month {
-	margin-top: 4px;
-	font-size: 18px;
-	text-align: left;
-	/*margin-right: 25px;*/
-	border-left: 1px solid #333333;
-	/*border-bottom: 1px solid #333333;*/
-	/*background-color: #1a1a1a;*/
+.location {
+	position: relative;
+	font-size: 24px;
+	width: 400px;
+	height: 100px;
 }
 
 .temperature, .big-mac-price, 
 .big-mac-index, .rainfall{
-	font-size: 17px;
+/*	border: 2px solid black;
+	height: 40px;
+	width: 100px;*/
+	font-size: 25px;
+	display: inline-block;
+	position: absolute;
+	bottom: 2%;
+	text-align: center;
 }
+
+.city, .country {
+/*	border: 2px solid black;
+	margin: 10px;
+	height: 40px;
+	width: 200px;*/
+	font-size: 28px;
+	display: inline-block;
+	
+	position: absolute;
+	text-align: center;
+	top: 10%;
+}
+
+.month {
+	position: absolute;
+/*	border: 2px solid black;
+ 	margin: 5px;
+	height: 40px;
+	width: 200px;*/
+	font-size: 28px;
+	display: inline-block;
+	bottom: 5%;
+	text-align: center;
+	left: 5%;
+}
+.city {
+	left: 5%;
+}
+.country{
+	left: 30%;
+ }
 
  .exchange-rate {
+	position: absolute;
+/*	border: 2px solid black;
+	margin: 5px;
+	height: 40px;
+	width: 200px;*/
 	font-size: 14px;
+	display: inline-block;
+	bottom: 2%;
+	text-align: center;
+	left: 60%;
 }
+
 
 #icon0, #icon1, #icon2, #icon3 {
-	width: 70%;
+	width: 70px;
 	height: auto;
-	margin: 10px 5px;
+	position: absolute;
 }
 
-#exchange-rate-box {
-	margin-left: 15px;
+.big-mac-index{
+	left: 70.75%;
 }
 
-
-.icon-box {
-	background-color: #778899;
-	position: relative;
-	height: auto;
-	text-align: center;
-	margin: 6px;
-	border-radius: 3px;
+.temperature{
+	left: 80%;
 }
 
-.icon-box:first-child {
-	margin-left: 15px;
+ .rainfall{
+	left: 90%;	
+ }
+
+#icon0{
+	top: 9%;
+	left: 60%;
+}
+#icon1{
+	top: 8%;
+	left: 70%;
+}
+
+#icon2{
+	top: 8%;
+	left: 80%
+}
+
+#icon3{
+	top: 7%;
+	left: 90%;
 }
 
 /*travel info button*/
 .travel-button {
-    background-color: #236B8E;
-    border-radius: 3px;
-	height: auto;
+    background-color: white;
+    color: black;
+    border: 2px solid #343a40;
+    border-radius: 7px;
+    bottom: 5%;
+	width: 250px;
+	height: 40px;
+	position: absolute;
 	font-family: 'Ubuntu', sans-serif;
+	left: 30%;
 	text-align: center;	
-	color: 000000;
-	border: 0px #DCDCDC solid;
-	color: white;
-	margin: 6px;
-	line-height: 20px;
-	text-align: 
-}
-
-.button-text {
-	margin-top: 15px;
+	/*border: 3px solid #DCDCDC;*/
+	line-height: 36px;
 }
 
 .travel-button:hover {
     background-color: #343a40;
     color: white;
-    text-decoration: none;
 }
 
 .travelbutton:visited, .travelbutton:link {
 	color: black;
 	text-decoration: none;
 }
-
-
 /*---------------Remove Button styling -----------------*/
 label {
 	font-family: 'Ubuntu', sans-serif;
 	font-style: bold;
-	font-size: 20px;
+	font-size: 18px;
 	color: white;
-	text-align: center;
 }
 
+}
 .remove-button {
 	width: 25px;
 	height: 25px;
 	color: #777;
 	font: 14px/100% arial, sans-serif;
 	position: absolute;
-	right: 1px;
+	right: 5px;
 	text-decoration: none;
 	text-shadow: 0 1px 0 #fff;
-	top: 1px;
+	top: 5px;
 	content: 'X';
 }
 /*---------------Remove Button styling -----------------*/
@@ -225,28 +254,17 @@ label {
 
 
 /*---------------Start of styling for the Card Div itself, as well as to make the card grabbable -------------*/
-
-#card-row {
-	    display: -webkit-flex; /* Safari */
-    -webkit-justify-content: space-around; /* Safari 6.1+ */
-    display: flex;
-    justify-content: space-around;
-}
-
 .card-div{
 	position: relative;
-	opacity: .8;
-	color: white;
+	color: black;
 	font-family: 'Ubuntu', sans-serif;
 /*	font-size: 30px;*/
 	width: 100%;
-
-	height: 100%;
-	border: 3px solid black;
-	border-radius: 3px;
-	background-color: black;
+	height: 120px;
+	border: 3px solid #DCDCDC;
+	border-radius: 10px;
+	background-color: #778899;
 	margin-bottom: 10px;
-
 }
 .card-div.over {
 	border: 4px dashed #000;
@@ -265,7 +283,52 @@ label {
 /*---------------------end of styling for Card Div itself -------------------------------*/
 
 
+/*------------------tooltip popup styling. Still in progress---------------------------*/
+/*#icon0{
+	top: 9%;
+	left: 60%;
+}*/
+
+.tooltip {
+	top: 9%;
+	left: 60%;
+	width: 70px;
+	height: 70px;
+	position: absolute;
+	display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+
 /*---------------Bottom Icons Cards ---------------------*/
+
 
 
 .directory-icon-container {
@@ -278,15 +341,27 @@ label {
   border-radius: 3px;
   position: relative;
   padding: 10px;
-  opacity: .8;
-}
+  opacity: .78;
+
+
+/*  padding-left: 65px;*/
+
+ }
+
+/*.directory-icon-container div {
+  flex:1;
+
+  }*/
 
 .directory-icon {
 	margin-top: 10px;
   	width: 40%;
   	display: block;
   	margin: 0 auto;
-}
+  	
+  	
+
+  }
 
  .icon-card {
  	margin-top: 10px;
@@ -296,11 +371,13 @@ label {
  	height: 300px;
 	position: absolute;
 	bottom: 0;
-}
+
+ }
 
 .directory-icon-container h3 {
 	margin-top: 8px;
 	font-size: 22px;
+
 	text-align: center;
 	position: relative;
 	color: white;
@@ -309,6 +386,7 @@ label {
 .directory-icon-container p {
 	margin: 10px 5px 5px 5px;
 	font-size: 14px;
+	
 	text-align: center;
 	position: relative;
 	color: white;
@@ -316,30 +394,4 @@ label {
 
 /*------------Media Queries-------------*/
 
-/*@media screen and (max-width: 980px) {
-
-div.search-bars {
-	height: 100%;
-}*/
-
-
-
 @media screen and (max-width: 768px) {
-
-div.search-bars {
-	height: 100%;
-	width: 100%;
-}
-
-}
-
-
-@media screen and (max-width: 640px) {
-
-div.search-bars {
-	height: 100%;
-	width: 110%;
-	margin-left:; 10px;
-}
-
-}
