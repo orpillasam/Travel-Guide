@@ -65,7 +65,7 @@ $(document).ready(function() {
 	 $("#f_elem_city").autocomplete({
 		source: function (request, response) {
 		 $.getJSON(
-		 	"https://gd.geobytes.com/AutoCompleteCity?callback=?&q=" + request.term,
+		 	"http://gd.geobytes.com/AutoCompleteCity?callback=?&q=" + request.term,
 			function (data) {
 			// var placesArray = [];
 			 // for(let i = 0; i<data.places.length; i++){
@@ -219,7 +219,7 @@ $(document).ready(function() {
 			// 4. The selected month	(Get through user input)
 
 	 function getRequiredInfo(cityValues, selectedMonth){
-	 	var queryURL = "https://gd.geobytes.com/GetCityDetails?callback=?&fqcn=" + cityValues;
+	 	var queryURL = "http://gd.geobytes.com/GetCityDetails?callback=?&fqcn=" + cityValues;
 	 	
 	 	$.ajax({
 	 	  dataType: "json", //Some APIs don't know what datatype to return unless you tell them to!
@@ -415,8 +415,9 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			
 
 			var countryFullNameLower = countryFullName.toLowerCase();
-			var countryLink = "https://travel.state.gov/content/passports/en/country/" + countryFullNameLower + ".html"
-			var buttonDiv = $("<a href=" + countryLink + "></a>");
+			countryFullNameLower = countryFullNameLower.replace(/\s/g, '-');
+			var countryLink = "https://travel.state.gov/content/passports/en/country/" + countryFullNameLower + ".html";
+			var buttonDiv = $("<a href=" + countryLink + " target='_blank'></a>");
 			buttonDiv.append();
 			buttonDiv.addClass('travel-button');
 

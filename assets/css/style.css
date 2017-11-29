@@ -58,22 +58,27 @@ body {
   	margin: 0 auto;
 }
 #logo-row p {
-	font-size: 20px;
+	font-size: 18px;
 	text-align: center;
 	color: white;
+
 }
 
 #search-bar-row {
-	margin: 10px 0 0 30px;
+	margin: 10px 0 0 20px;
 }
 
+/*#search-bars label {
+	padding-top: 10px;
+}*/
 div.search-bars {
 	background-color: black;
 	opacity: .78;
-	height: 140px;
+	height: 100%;
 	width: 100%;
-	padding-top: 20px;
+	padding: 20px -10px 20px -10px;
 	border-radius: 3px;
+	margin-bottom: 20px;
 }
 
 #nc-submit-city{
@@ -194,22 +199,29 @@ div.search-bars {
 	left: 90%;
 }
 
+/*travel info button*/
 .travel-button {
-	bottom: 5%;
+    background-color: white;
+    color: black;
+    border: 2px solid #343a40;
+    border-radius: 7px;
+    bottom: 5%;
 	width: 250px;
 	height: 40px;
-	color: white;
 	position: absolute;
-	color: black;
 	font-family: 'Ubuntu', sans-serif;
 	left: 30%;
 	text-align: center;	
-	border: 3px solid #DCDCDC;
-	background: white;
+	/*border: 3px solid #DCDCDC;*/
 	line-height: 36px;
 }
 
-.travel-button:hover, .travelbutton:visited, .travelbutton:link {
+.travel-button:hover {
+    background-color: #343a40;
+    color: white;
+}
+
+.travelbutton:visited, .travelbutton:link {
 	color: black;
 	text-decoration: none;
 }
@@ -326,10 +338,11 @@ label {
   margin-top: 50px;
   background-color: black;
   height: 100%;
-  border-radius: 15px;
+  border-radius: 3px;
   position: relative;
-  padding-top: 15px;
+  padding: 10px;
   opacity: .78;
+
 
 /*  padding-left: 65px;*/
 
@@ -342,7 +355,7 @@ label {
 
 .directory-icon {
 	margin-top: 10px;
-  	width:40%;
+  	width: 40%;
   	display: block;
   	margin: 0 auto;
   	
@@ -362,7 +375,7 @@ label {
  }
 
 .directory-icon-container h3 {
-	margin-top: 10px;
+	margin-top: 8px;
 	font-size: 22px;
 
 	text-align: center;
@@ -378,3 +391,7 @@ label {
 	position: relative;
 	color: white;
 }
+
+/*------------Media Queries-------------*/
+
+@media screen and (max-width: 768px) {
