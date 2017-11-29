@@ -110,7 +110,7 @@ $(document).ready(function() {
 
 			// PART 2: Run the info through our APIs and show desired values.
 
-	function getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName, dataId){
+	function getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName, countryProvince, dataId){
 
     	//needs a valid city name input   
    		var queryURL = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=1814235921e94fd2998195653171511&q=" + city + "&format=json&mca=yes&showmap=yes"
@@ -144,11 +144,11 @@ $(document).ready(function() {
 		  var averageDailyRainfall = (results[selectedMonth].avgDailyRainfall);
 		  var averageMonthRainfall = averageDailyRainfall * 30 / 25.4; //coverts the average rainfall into inches. *(days in a month) /(milimeters in a inch)
 		  
-		  travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName, dataId);
+		  travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName, countryProvince, dataId);
         }); 
     }
     
-    function getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName, dataId) {
+    function getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName, countryProvince, dataId) {
       	//ALERT - will need to change the var country to the country code. will need to put info a country object
     	var queryURL = "https://www.quandl.com/api/v3/datasets/ECONOMIST/BIGMAC_" + country + "?start_date=2017-07-31&end_date=2017-07-31&api_key=9TGtJzuQxqvJizpJDPXX"
             
@@ -168,15 +168,15 @@ $(document).ready(function() {
           // the USA big mac price divided by the big mac price in the input country 
           var bigMacIndex = bigMacUSD / countryDollarPrice;
           
-		  getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName, dataId);
+		  getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName, countryProvince, dataId);
         });
 
     }
 
-    function getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName, dataId) { 
+    function getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName, countryProvince, dataId) { 
 
 		// var queryURL = "https://v3.exchangerate-api.com/bulk/4b0db198bb26ff6f36044583/USD"
-		var queryURL = "https://v3.exchangerate-api.com/bulk/8e7d9587b452200d942573dd/USD";
+		var queryURL = "https://v3.exchangerate-api.com/bulk/d6e2faac133e3b07d10ea4c7/USD";
         
         $.ajax({
           url: queryURL,
@@ -190,14 +190,14 @@ $(document).ready(function() {
           var exchangeRate = results[currency];  
           
 
-          getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName, dataId); //We must call getBigMac here because we need the exchange rate after exchange rate is called.
+          getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName, countryProvince, dataId); //We must call getBigMac here because we need the exchange rate after exchange rate is called.
 
         });
      }
 
-	function displayValues(currency, country, city, selectedMonth, countryFullName, dataId){
+	function displayValues(currency, country, city, selectedMonth, countryFullName, countryProvince, dataId){
 		//Functions called after each done... to make it synchronous.
-		getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName, dataId);			
+		getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName, countryProvince, dataId);			
 	} 
 
 	database.ref().on('child_added',function(childSnapshot){
@@ -207,9 +207,11 @@ $(document).ready(function() {
 		var dataCity = childSnapshot.val().cityName;
 		var dataMonth = childSnapshot.val().month;
 		var dataCountryFullName = childSnapshot.val().countryFullName;
+		var dataCountryProvince = childSnapshot.val().countryProvince;
 		var dataId = childSnapshot.key;
+
 		
-		displayValues(dataCurrency,dataCountry,dataCity,dataMonth,dataCountryFullName, dataId);
+		displayValues(dataCurrency,dataCountry,dataCity,dataMonth,dataCountryFullName, dataCountryProvince, dataId);
 		
 
 	});
@@ -231,7 +233,8 @@ $(document).ready(function() {
           var countryiso2 = data.geobytesinternet;
           var countryiso3 = countryCodeConversion[countryiso2];
           var countryFullName = data.geobytescountry;
-
+          var countryProvince = data.geobytescode;
+          console.log("country province is " + countryProvince)
     	  var city = data.geobytescity.toUpperCase();
     	  var country = countryiso3;
 		  var currency = data.geobytescurrencycode;
@@ -241,7 +244,8 @@ $(document).ready(function() {
 			currency:currency,
 			countryName:country,
 			cityName:city,
-			month:selectedMonth
+			month:selectedMonth,
+			countryProvince:countryProvince
 		}
 		database.ref().push(userSearch);
 		  
@@ -352,7 +356,7 @@ function handleDragEnd(e) {
 	this.classList.remove('over');
 }
 function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, 
-					country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName, dataId){
+					country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName, countryProvince, dataId){
 	
 			var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 			var cardDiv = $('<div>');
@@ -373,8 +377,8 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 	
 			var cityDiv = $('<div>');
 			cityDiv.addClass('city');
-			cityDiv.append(cityUpperCaseFirst + ', ' + countryFullName);
-			cityDiv.addClass('col-6')
+			cityDiv.append(cityUpperCaseFirst + ', ' + countryProvince + ', ' + countryFullName);
+			cityDiv.addClass('col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8')
 
 			// var countryDiv = $('<div>');
 			// countryDiv.addClass('country');
@@ -383,7 +387,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			var monthDiv = $('<div>');
 			monthDiv.addClass('month');
 			monthDiv.append(monthNames[selectedMonth]);
-			// monthDiv.addClass('col-6')
+			monthDiv.addClass('col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3')
 	
 			var exchangeRateConvertedDiv = $('<div>');
 			exchangeRateConvertedDiv.addClass('exchange-rate');
@@ -403,7 +407,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			var averageMonthRainfallConvertedDiv = $('<div>');
 			averageMonthRainfallConvertedDiv.addClass('rainfall');
 			averageMonthRainfallConvertedDiv.text(averageMonthRainfallConverted);
-			averageMonthRainfallConvertedDiv.append('in')
+			averageMonthRainfallConvertedDiv.append(' in')
 	
 			var countryDollarPriceConvertedDiv = $('<div>');	
 			countryDollarPriceConvertedDiv.addClass('big-mac-price');
@@ -421,37 +425,35 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			var buttonDiv = $("<a href=" + countryLink + " target='_blank'></a>");
 			buttonDiv.append();
 			buttonDiv.addClass('travel-button');
-			buttonDiv.addClass('col-1');
-			buttonDiv.text('More Travel Info');
+			buttonDiv.addClass('col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2');
+			buttonDiv.text('Visa Passport Embassy');
 
 
 			iconDiv0 = $('<div>');
 			iconDiv0.append("<img id='icon0' src='assets/images/final_currency.png' draggable = 'false' />")
 			iconDiv0.append(exchangeRateConvertedDiv);
 			iconDiv0.addClass('icon-box');
-			iconDiv0.addClass('col-1');
+			iconDiv0.addClass('col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2');
 			iconDiv0.attr('id', 'exchange-rate-box');
 			iconDiv1 = $('<div>');
 			iconDiv1.append("<img id='icon1' src='assets/images/final_burger.png' draggable = 'false' />")
 			iconDiv1.append(bigMacIndexConvertedDiv)
 			iconDiv1.addClass('icon-box');
-			iconDiv1.addClass('col-1');
+			iconDiv1.addClass('col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2');
 			iconDiv1.attr('id', 'big-mac-box');
 			iconDiv2 = $('<div>');
 			iconDiv2.append("<img id='icon2' src='assets/images/final_temperature.png' draggable = 'false'/>")
 			iconDiv2.append(averageTempDiv);
 			iconDiv2.addClass('icon-box');
-			iconDiv2.addClass('col-1');
+			iconDiv2.addClass('col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2');
 			iconDiv2.attr('id', 'temp-box');
 			iconDiv3 = $('<div>');
 			iconDiv3.append("<img id='icon3' src='assets/images/final_rainfall.png' draggable = 'false'/>")
 			iconDiv3.append(averageMonthRainfallConvertedDiv);
 			iconDiv3.addClass('icon-box');
-			iconDiv3.addClass('col-1');
+			iconDiv3.addClass('col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2');
 			iconDiv3.attr('id', 'rain-box');
 	
-	
-			
 			$(cardDiv).attr({'class':'card-div grabbable',  'draggable': true});
 			//Adding listeners for dragging and dropping divs. 
 			// $(cardDiv).addClass('animated fadeOut');
@@ -468,7 +470,6 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 
 			cardDiv.append(cityDiv);
 			cardDiv.append(monthDiv);
-			// cardDiv.append(countryDiv);
 			cardDiv.append(iconDiv0);
 			cardDiv.append(iconDiv1);
 			cardDiv.append(iconDiv2);
@@ -476,13 +477,5 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			cardDiv.append(removeDiv);
 			cardDiv.append(buttonDiv);
 	
-			// cardDiv.append(countryDollarPriceConvertedDiv);
-	 
-			// cardDiv.append(bigMacIndexConvertedDiv);
-			
-			// cardDiv.append(averageTempDiv);
-	
-			// cardDiv.append(averageMonthRainfallConvertedDiv)
-			// cardDiv.append(exchangeRateConvertedDiv);
 			$('#card-well').append(cardDiv);
 		}
