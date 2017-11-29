@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-
 body {
 	background: linear-gradient(rgba(0,0,0,0.2),#AFEEEE 87%), url(../images/background-image.jpeg);
 	background-size: cover;
@@ -14,8 +13,6 @@ body {
 	width: 100%;
 	margin: 0px;
 }
-
-
 
 /*-------------End of Body elements---------------------*/
 
@@ -41,7 +38,7 @@ body {
 	width: auto;
 	height: 100%
 	/*padding-left: 25px;*/
-	
+
 }
 
 /* -------------------End of Header elements ------------------- */
@@ -57,26 +54,31 @@ body {
 	display: block;
   	margin: 0 auto;
 }
+
 #logo-row p {
 	font-size: 18px;
 	text-align: center;
 	color: white;
-
 }
 
 #search-bar-row {
 	margin: 10px 0 0 20px;
 }
 
-/*#search-bars label {
+/*.search-bar-text {
 	padding-top: 10px;
+
+}
+*/
+/*.search-area {
+	padding-bottom: 10px;
 }*/
 div.search-bars {
 	background-color: black;
-	opacity: .78;
-	height: 100%;
+	opacity: .8;
+	height: 150px;
 	width: 100%;
-	padding: 20px -10px 20px -10px;
+	padding: 20px;
 	border-radius: 3px;
 	margin-bottom: 20px;
 }
@@ -95,7 +97,6 @@ div.search-bars {
 
 
 /*-----------------Start of  styling for the elements inside the Card Div that is created in JS --------------------*/
-
 
 .location {
 	position: relative;
@@ -161,7 +162,6 @@ div.search-bars {
 	left: 60%;
 }
 
-
 #icon0, #icon1, #icon2, #icon3 {
 	width: 70px;
 	height: auto;
@@ -178,12 +178,13 @@ div.search-bars {
 
  .rainfall{
 	left: 90%;	
- }
+}
 
 #icon0{
 	top: 9%;
 	left: 60%;
 }
+
 #icon1{
 	top: 8%;
 	left: 70%;
@@ -229,14 +230,15 @@ div.search-bars {
 label {
 	font-family: 'Ubuntu', sans-serif;
 	font-style: bold;
-	font-size: 18px;
+	font-size: 20px;
 	color: white;
+	text-align: center;
 }
 
-}
+
 .remove-button {
-	width: 25px;
-	height: 25px;
+	width: 20px;
+	height: 20px;
 	color: #777;
 	font: 14px/100% arial, sans-serif;
 	position: absolute;
@@ -256,13 +258,14 @@ label {
 /*---------------Start of styling for the Card Div itself, as well as to make the card grabbable -------------*/
 .card-div{
 	position: relative;
-	color: black;
+	opacity: .92;
+	color: white;
 	font-family: 'Ubuntu', sans-serif;
 /*	font-size: 30px;*/
 	width: 100%;
 	height: 120px;
-	border: 3px solid #DCDCDC;
-	border-radius: 10px;
+	border: 3px solid black;
+	border-radius: 3px;
 	background-color: #778899;
 	margin-bottom: 10px;
 }
@@ -330,7 +333,6 @@ label {
 /*---------------Bottom Icons Cards ---------------------*/
 
 
-
 .directory-icon-container {
   display:flex;
   align-items: center;
@@ -341,7 +343,7 @@ label {
   border-radius: 3px;
   position: relative;
   padding: 10px;
-  opacity: .78;
+  opacity: .8;
 
 
 /*  padding-left: 65px;*/
@@ -358,10 +360,7 @@ label {
   	width: 40%;
   	display: block;
   	margin: 0 auto;
-  	
-  	
-
-  }
+}
 
  .icon-card {
  	margin-top: 10px;
@@ -371,13 +370,11 @@ label {
  	height: 300px;
 	position: absolute;
 	bottom: 0;
-
- }
+}
 
 .directory-icon-container h3 {
 	margin-top: 8px;
 	font-size: 22px;
-
 	text-align: center;
 	position: relative;
 	color: white;
@@ -386,7 +383,6 @@ label {
 .directory-icon-container p {
 	margin: 10px 5px 5px 5px;
 	font-size: 14px;
-	
 	text-align: center;
 	position: relative;
 	color: white;
@@ -394,4 +390,27 @@ label {
 
 /*------------Media Queries-------------*/
 
+/*@media screen and (max-width: 980px) {
+
+div.search-bars {
+	height: 100%;
+}*/
+
+
+
 @media screen and (max-width: 768px) {
+
+div.search-bars {
+	height: 100%;
+}
+
+}
+
+
+@media screen and (max-width: 640px) {
+
+div.search-bars {
+	height: 100%;
+}
+
+}

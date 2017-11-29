@@ -138,8 +138,9 @@ $(document).ready(function() {
 		  var minTempNumber = parseInt(minTemp);
 		  var maxTempNumber = parseInt(maxTemp);
 		  
-		  var averageTemp = (minTempNumber + maxTempNumber) / 2;		 
-		  
+		  var averageTemp = (minTempNumber + maxTempNumber) / 2;		  
+		  var averageTemp = maxTempNumber - 10;	
+
 		  var averageDailyRainfall = (results[selectedMonth].avgDailyRainfall);
 		  var averageMonthRainfall = averageDailyRainfall * 30 / 25.4; //coverts the average rainfall into inches. *(days in a month) /(milimeters in a inch)
 		  
@@ -372,11 +373,12 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 	
 			var cityDiv = $('<div>');
 			cityDiv.addClass('city');
-			cityDiv.append(cityUpperCaseFirst);
+			cityDiv.append(cityUpperCaseFirst + ', ' + countryFullName);
+
 	
-			var countryDiv = $('<div>');
-			countryDiv.addClass('country');
-			countryDiv.append(countryFullName);
+			// var countryDiv = $('<div>');
+			// countryDiv.addClass('country');
+			// countryDiv.append(countryFullName);
 			
 
 			var monthDiv = $('<div>');
@@ -408,10 +410,10 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			countryDollarPriceConvertedDiv.text("$")
 			countryDollarPriceConvertedDiv.append(countryDollarPriceConverted);
 
-		var removeDiv = $('<button>')
-		removeDiv.addClass('remove-button');
-		removeDiv.attr('data-id', dataId);
-		removeDiv.text('X');
+			var removeDiv = $('<button>')
+			removeDiv.addClass('remove-button');
+			removeDiv.attr('data-id', dataId);
+			removeDiv.text('X');
 			
 
 			var countryFullNameLower = countryFullName.toLowerCase();
@@ -421,7 +423,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			buttonDiv.append();
 			buttonDiv.addClass('travel-button');
 
-			buttonDiv.text('Passport/Visa/Embassy Info');
+			buttonDiv.text('More Travel Info');
 
 
 			iconDiv0 = $('<div>');
@@ -449,7 +451,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			$(cardDiv).on('dragend', handleDragEnd);
 
 			cardDiv.append(cityDiv);
-			cardDiv.append(countryDiv);
+			// cardDiv.append(countryDiv);
 			cardDiv.append(iconDiv0);
 			cardDiv.append(iconDiv1);
 			cardDiv.append(iconDiv2);
