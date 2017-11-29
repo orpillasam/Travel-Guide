@@ -66,6 +66,7 @@ $(document).ready(function () {
 
 	$("#f_elem_city").autocomplete({
 		source: function (request, response) {
+<<<<<<< HEAD
 			$.getJSON(
 				"http://gd.geobytes.com/AutoCompleteCity?callback=?&q=" + request.term,
 				function (data) {
@@ -80,6 +81,22 @@ $(document).ready(function () {
 					response(data);
 				}
 			);
+=======
+		 $.getJSON(
+		 	"http://gd.geobytes.com/AutoCompleteCity?callback=?&q=" + request.term,
+			function (data) {
+			// var placesArray = [];
+			 // for(let i = 0; i<data.places.length; i++){
+			 // 	var valueObject = {
+			 // 		"value": data.places[i].longName
+			 // 	}
+			 // 	placesArray.push(valueObject);
+			 // }
+			 
+			 response(data);
+			}
+		 );
+>>>>>>> d2adf755a3c4e37e50afeba2785df615f55b8370
 		},
 		minLength: 3,
 		select: function (event, ui) {
@@ -108,6 +125,7 @@ $(document).ready(function () {
    ------------------------------------------------------------------------*/
 
 	const bigMacUSD = 5.3;
+<<<<<<< HEAD
 
 
 	// PART 2: Run the info through our APIs and show desired values.
@@ -211,12 +229,111 @@ $(document).ready(function () {
 	database.ref().on('child_added', function (childSnapshot) {
 		console.log(childSnapshot);
 
+=======
+	
+
+			// PART 2: Run the info through our APIs and show desired values.
+
+	function getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName, dataId){
+
+    	//needs a valid city name input   
+   		var queryURL = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=1814235921e94fd2998195653171511&q=" + city + "&format=json&mca=yes&showmap=yes"
+        
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).done(function(response) {
+          console.log(response);
+          var results = response.data.ClimateAverages[0].month;
+           //var selectedMonth is a user input. needs to be an index #, 0-11.
+
+        //minimum temperature of the selected month in input city
+          var minTemp = (results[selectedMonth].avgMinTemp_F);       
+
+          //maximum temperature of the selected month in input city
+          var maxTemp = (results[selectedMonth].absMaxTemp_F);         
+
+          //average daily rainfall in selected month in input city, in milimeters
+          var averageDailyRainfall = (results[selectedMonth].avgDailyRainfall);   
+
+          //coverts the average rainfall into inches. *(days in a month) /(milimeters in a inch)
+          var averageMonthRainfall = averageDailyRainfall * 30 / 25.4;
+         
+		  var minTempNumber = parseInt(minTemp);
+		  var maxTempNumber = parseInt(maxTemp);
+		  
+		  var averageTemp = (minTempNumber + maxTempNumber) / 2;		  
+		  var averageTemp = maxTempNumber - 7;	
+
+		  var averageDailyRainfall = (results[selectedMonth].avgDailyRainfall);
+		  var averageMonthRainfall = averageDailyRainfall * 30 / 25.4; //coverts the average rainfall into inches. *(days in a month) /(milimeters in a inch)
+		  
+		  travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName, dataId);
+        }); 
+    }
+    
+    function getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName, dataId) {
+      	//ALERT - will need to change the var country to the country code. will need to put info a country object
+    	var queryURL = "https://www.quandl.com/api/v3/datasets/ECONOMIST/BIGMAC_" + country + "?start_date=2017-07-31&end_date=2017-07-31&api_key=9TGtJzuQxqvJizpJDPXX"
+            
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).done(function(response) {
+          console.log(response);
+          var results = response.dataset;
+
+          // the cost of a big mac in the input country's currency 
+          var countryPrice = (results.data[0][1]);
+
+          //the cost of a big mac in the input country, in USD
+          var countryDollarPrice = countryPrice / exchangeRate;
+          
+          // the USA big mac price divided by the big mac price in the input country 
+          var bigMacIndex = bigMacUSD / countryDollarPrice;
+          
+		  getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName, dataId);
+        });
+
+    }
+
+    function getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName, dataId) { 
+
+		// var queryURL = "https://v3.exchangerate-api.com/bulk/4b0db198bb26ff6f36044583/USD"
+		var queryURL = "https://v3.exchangerate-api.com/bulk/8e7d9587b452200d942573dd/USD";
+        
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).done(function(response) {
+          console.log(response);
+          var results = response.rates;       
+
+            //currently using the currency input field, but we will put each country in an object and call the currency from there
+            //and we will call the currency code of the selected country
+          var exchangeRate = results[currency];  
+          
+
+          getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName, dataId); //We must call getBigMac here because we need the exchange rate after exchange rate is called.
+
+        });
+     }
+
+	function displayValues(currency, country, city, selectedMonth, countryFullName, dataId){
+		//Functions called after each done... to make it synchronous.
+		getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName, dataId);			
+	} 
+
+	database.ref().on('child_added',function(childSnapshot){
+		
+>>>>>>> d2adf755a3c4e37e50afeba2785df615f55b8370
 		var dataCurrency = childSnapshot.val().currency;
 		var dataCountry = childSnapshot.val().countryName;
 		var dataCity = childSnapshot.val().cityName;
 		var dataMonth = childSnapshot.val().month;
 		var dataCountryFullName = childSnapshot.val().countryFullName;
 		var dataId = childSnapshot.key;
+<<<<<<< HEAD
 
 
 		displayValues(dataCurrency, dataCountry, dataCity, dataMonth, dataCountryFullName, dataId);
@@ -276,12 +393,49 @@ $(document).ready(function () {
 
 		} else {
 			alert('Warning: Bad input!'); //Change later
+=======
+		
+		displayValues(dataCurrency,dataCountry,dataCity,dataMonth,dataCountryFullName, dataId);
+		
+
+	});
+	// 	PART 1: Required Info to search for in the api:
+			// 1. COUNTRY (in ISO-3, caps)	(Get through string manipulation)
+			// 2. CITY    (in caps)	(Get through string manipulation)
+			// 3. Currency (Three letter initial) (May need to search through the API or use a direct object)
+			// 4. The selected month	(Get through user input)
+
+	 function getRequiredInfo(cityValues, selectedMonth){
+	 	var queryURL = "http://gd.geobytes.com/GetCityDetails?callback=?&fqcn=" + cityValues;
+	 	
+	 	$.ajax({
+	 	  dataType: "json", //Some APIs don't know what datatype to return unless you tell them to!
+          url: queryURL,
+          method: "GET"
+        }).done(function(data) {
+          console.log(data);
+          var countryiso2 = data.geobytesinternet;
+          var countryiso3 = countryCodeConversion[countryiso2];
+          var countryFullName = data.geobytescountry;
+
+    	  var city = data.geobytescity.toUpperCase();
+    	  var country = countryiso3;
+		  var currency = data.geobytescurrencycode;
+		  
+		  var userSearch = {
+		  	countryFullName:countryFullName,
+			currency:currency,
+			countryName:country,
+			cityName:city,
+			month:selectedMonth
+>>>>>>> d2adf755a3c4e37e50afeba2785df615f55b8370
 		}
 
 
 	});
 
 	//Script to remove the card element by clicking the 'X'
+<<<<<<< HEAD
 	$("body").on('click', '.remove-button', (function () {
 		console.log($(this).attr('data-id'));
 		var idToRemove = $(this).attr('data-id');
@@ -294,6 +448,13 @@ $(document).ready(function () {
 		window.open('https://travel.state.gov/content/passports/en/country/' + countryFullName + '.html', '_blank');
 
 	}));
+=======
+	$("body").on('click', '.remove-button', function () {
+		var idToRemove = $(this).attr('data-id');
+		database.ref().child(idToRemove).remove();
+		$(this).closest('.card-div').remove();
+	});
+>>>>>>> d2adf755a3c4e37e50afeba2785df615f55b8370
 
 });
 //script to add animations to elements that are clicked with animiate.css classes added to it
@@ -368,6 +529,7 @@ function handleDragEnd(e) {
 	this.style.opacity = '1.0';
 	this.classList.remove('over');
 }
+<<<<<<< HEAD
 function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 	country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName, dataId) {
 
@@ -483,3 +645,140 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 	$('#card-well').append(cardDiv);
 }
 
+=======
+function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, 
+					country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName, dataId){
+	
+			var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+			var cardDiv = $('<div>');
+					
+			var exchangeRateConverted = Math.round(exchangeRate * 100) / 100;
+	
+			var countryDollarPriceConverted = Math.round(countryDollarPrice * 100) / 100;
+			$(countryDollarPriceConverted).addClass('big-mac-price');
+
+			// Always show at least two digits, as a floating number (for site consistency).
+			var bigMacIndexConverted = parseFloat(Math.round(bigMacIndex * 100) / 100).toFixed(2);
+	
+			var averageMonthRainfallConverted = Math.round(averageMonthRainfall * 100) / 100;
+			
+			//converts city in first letter uppercase
+			var cityLower = city.toLowerCase();
+			var cityUpperCaseFirst = cityLower.charAt(0).toUpperCase() + cityLower.slice(1);
+	
+			var cityDiv = $('<div>');
+			cityDiv.addClass('city');
+			cityDiv.append(cityUpperCaseFirst + ', ' + countryFullName);
+			cityDiv.addClass('col-6')
+
+			// var countryDiv = $('<div>');
+			// countryDiv.addClass('country');
+			// countryDiv.append(countryFullName);			
+
+			var monthDiv = $('<div>');
+			monthDiv.addClass('month');
+			monthDiv.append(monthNames[selectedMonth]);
+			// monthDiv.addClass('col-6')
+	
+			var exchangeRateConvertedDiv = $('<div>');
+			exchangeRateConvertedDiv.addClass('exchange-rate');
+			exchangeRateConvertedDiv.text(exchangeRateConverted);
+			exchangeRateConvertedDiv.append(" " + currency);
+	
+	
+			var bigMacIndexConvertedDiv = $('<div>');
+			bigMacIndexConvertedDiv.addClass('big-mac-index');
+			bigMacIndexConvertedDiv.text(bigMacIndexConverted);  //temporary hard code
+	
+			var averageTempDiv = $('<div>');
+			averageTempDiv.addClass('temperature');
+			averageTempDiv.text(averageTemp); //temperature hard code
+			averageTempDiv.append(" F");
+	
+			var averageMonthRainfallConvertedDiv = $('<div>');
+			averageMonthRainfallConvertedDiv.addClass('rainfall');
+			averageMonthRainfallConvertedDiv.text(averageMonthRainfallConverted);
+			averageMonthRainfallConvertedDiv.append('in')
+	
+			var countryDollarPriceConvertedDiv = $('<div>');	
+			countryDollarPriceConvertedDiv.addClass('big-mac-price');
+			countryDollarPriceConvertedDiv.text("$")
+			countryDollarPriceConvertedDiv.append(countryDollarPriceConverted);
+
+			var removeDiv = $('<button>')
+			removeDiv.addClass('remove-button');
+			removeDiv.attr('data-id', dataId);
+			removeDiv.text('X');		
+
+			var countryFullNameLower = countryFullName.toLowerCase();
+			countryFullNameLower = countryFullNameLower.replace(/\s/g, '-');
+			var countryLink = "https://travel.state.gov/content/passports/en/country/" + countryFullNameLower + ".html";
+			var buttonDiv = $("<a href=" + countryLink + " target='_blank'></a>");
+			buttonDiv.append();
+			buttonDiv.addClass('travel-button');
+			buttonDiv.addClass('col-1');
+			buttonDiv.text('More Travel Info');
+
+
+			iconDiv0 = $('<div>');
+			iconDiv0.append("<img id='icon0' src='assets/images/final_currency.png' draggable = 'false' />")
+			iconDiv0.append(exchangeRateConvertedDiv);
+			iconDiv0.addClass('icon-box');
+			iconDiv0.addClass('col-1');
+			iconDiv0.attr('id', 'exchange-rate-box');
+			iconDiv1 = $('<div>');
+			iconDiv1.append("<img id='icon1' src='assets/images/final_burger.png' draggable = 'false' />")
+			iconDiv1.append(bigMacIndexConvertedDiv)
+			iconDiv1.addClass('icon-box');
+			iconDiv1.addClass('col-1');
+			iconDiv1.attr('id', 'big-mac-box');
+			iconDiv2 = $('<div>');
+			iconDiv2.append("<img id='icon2' src='assets/images/final_temperature.png' draggable = 'false'/>")
+			iconDiv2.append(averageTempDiv);
+			iconDiv2.addClass('icon-box');
+			iconDiv2.addClass('col-1');
+			iconDiv2.attr('id', 'temp-box');
+			iconDiv3 = $('<div>');
+			iconDiv3.append("<img id='icon3' src='assets/images/final_rainfall.png' draggable = 'false'/>")
+			iconDiv3.append(averageMonthRainfallConvertedDiv);
+			iconDiv3.addClass('icon-box');
+			iconDiv3.addClass('col-1');
+			iconDiv3.attr('id', 'rain-box');
+	
+	
+			
+			$(cardDiv).attr({'class':'card-div grabbable',  'draggable': true});
+			//Adding listeners for dragging and dropping divs. 
+			// $(cardDiv).addClass('animated fadeOut');
+			$(cardDiv).addClass('animated slideInUp');
+			$(cardDiv).addClass('row');
+			//animation to make the card slide up into the card well
+			
+			$(cardDiv).on('dragstart',handleDragStart);
+			$(cardDiv).on('dragenter',handleDragEnter);
+			$(cardDiv).on('dragleave', handleDragLeave);
+			$(cardDiv).on('dragover',handleDragOver);
+			$(cardDiv).on('drop', handleDrop);
+			$(cardDiv).on('dragend', handleDragEnd);
+
+			cardDiv.append(cityDiv);
+			cardDiv.append(monthDiv);
+			// cardDiv.append(countryDiv);
+			cardDiv.append(iconDiv0);
+			cardDiv.append(iconDiv1);
+			cardDiv.append(iconDiv2);
+			cardDiv.append(iconDiv3);
+			cardDiv.append(removeDiv);
+			cardDiv.append(buttonDiv);
+	
+			// cardDiv.append(countryDollarPriceConvertedDiv);
+	 
+			// cardDiv.append(bigMacIndexConvertedDiv);
+			
+			// cardDiv.append(averageTempDiv);
+	
+			// cardDiv.append(averageMonthRainfallConvertedDiv)
+			// cardDiv.append(exchangeRateConvertedDiv);
+			$('#card-well').append(cardDiv);
+		}
+>>>>>>> d2adf755a3c4e37e50afeba2785df615f55b8370
