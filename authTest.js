@@ -26,7 +26,7 @@ btnLogin.addEventListener('click', e => {
   //Sign in 
   const promise = auth.signInWithEmailAndPassword(email,pass);
   promise.catch(e => console.log(e.message));
-  user = firebase.auth().currentUser;
+  
 });
 
 btnSignUp.addEventListener('click', e => {
@@ -38,21 +38,25 @@ btnSignUp.addEventListener('click', e => {
   //Sign in 
   const promise = auth.createUserWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
-  user = firebase.auth().currentUser;
-  console.log(user);
-  database.ref('testUsers').push(user.uid);
+
 });
 
 btnLogout.addEventListener('click', e =>{
   firebase.auth().signOut();
-  user = null;
 });
 //Add a listener to see if the sign in change is changed
 firebase.auth().onAuthStateChanged(firebaseUser =>{
   if(firebaseUser){
-    btnLogout.classList.remove('hide');
-    console.log(firebaseUser);
-    console.log(firebaseUser.email);
+    database.ref().once('value', function(snapshot) {
+      if (!(snapshot.child('testUsers').hasChild("" + firebaseUser + ""))) {
+       
+        const users = {
+          uid: firebaseUser.uid
+        }
+        database.ref('testUsers').push(users);
+      }
+    });
+    
   }else{
     console.log('not logged in');
     btnLogout.classList.add('hide');
