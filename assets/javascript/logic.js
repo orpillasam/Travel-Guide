@@ -426,8 +426,11 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			buttonDiv.append();
 			buttonDiv.addClass('travel-button');
 			buttonDiv.addClass('col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2');
-			buttonDiv.text('Visa Passport Embassy');
 
+			var buttonText = $('<div>');
+			buttonText.addClass('button-text');
+			buttonText.text('Visa Passport Embassy');
+			buttonDiv.append(buttonText);
 
 			iconDiv0 = $('<div>');
 			iconDiv0.append("<img id='icon0' src='assets/images/final_currency.png' draggable = 'false' />")

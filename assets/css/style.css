@@ -112,11 +112,11 @@ div.search-bars {
 
 .city {
 	margin-top: 4px;
-	font-size: 20px;
+	font-size: 18px;
 	text-align: left;
 	border-left: 1px solid #333333;
 	/*border-bottom: 1px solid #333333;*/
-	margin-left: 6px;
+	margin-left: 15px;
 /*	background-color: #1a1a1a;*/
 	/*margin-right: 20px;
 	vertical-align: bottom;*/
@@ -124,7 +124,7 @@ div.search-bars {
 
 .month {
 	margin-top: 4px;
-	font-size: 20px;
+	font-size: 18px;
 	text-align: left;
 	/*margin-right: 25px;*/
 	border-left: 1px solid #333333;
@@ -134,7 +134,7 @@ div.search-bars {
 
 .temperature, .big-mac-price, 
 .big-mac-index, .rainfall{
-	font-size: 16px;
+	font-size: 17px;
 }
 
  .exchange-rate {
@@ -142,10 +142,15 @@ div.search-bars {
 }
 
 #icon0, #icon1, #icon2, #icon3 {
-	width: 90%;
+	width: 70%;
 	height: auto;
 	margin: 10px 5px;
 }
+
+#exchange-rate-box {
+	margin-left: 15px;
+}
+
 
 .icon-box {
 	background-color: #778899;
@@ -156,6 +161,9 @@ div.search-bars {
 	border-radius: 3px;
 }
 
+.icon-box:first-child {
+	margin-left: 15px;
+}
 
 /*travel info button*/
 .travel-button {
@@ -168,8 +176,12 @@ div.search-bars {
 	border: 0px #DCDCDC solid;
 	color: white;
 	margin: 6px;
-	vertical-align: middle;
-	line-height: 100%;
+	line-height: 20px;
+	text-align: 
+}
+
+.button-text {
+	margin-top: 15px;
 }
 
 .travel-button:hover {
