@@ -5,7 +5,7 @@
 }
 
 body {
-	background: linear-gradient(rgba(0,0,0,0.2),#AFEEEE 87%), url(../images/background-image.jpeg);
+	background: linear-gradient(rgba(0,0,0,0.2),#AFEEEE 100%), url(../images/background-image.jpeg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -344,7 +344,8 @@ label {
   border-radius: 3px;
   position: relative;
   padding: 10px;
-  opacity: .8;
+  opacity: .78;
+  font-family: 'Ubuntu';
 
 
 /*  padding-left: 65px;*/
@@ -358,7 +359,7 @@ label {
 
 .directory-icon {
 	margin-top: 10px;
-  	width: 40%;
+  	width: 60%;
   	display: block;
   	margin: 0 auto;
 }
