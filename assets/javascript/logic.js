@@ -139,7 +139,7 @@ $(document).ready(function() {
 		  var maxTempNumber = parseInt(maxTemp);
 		  
 		  var averageTemp = (minTempNumber + maxTempNumber) / 2;		  
-		  var averageTemp = maxTempNumber - 10;	
+		  var averageTemp = maxTempNumber - 7;	
 
 		  var averageDailyRainfall = (results[selectedMonth].avgDailyRainfall);
 		  var averageMonthRainfall = averageDailyRainfall * 30 / 25.4; //coverts the average rainfall into inches. *(days in a month) /(milimeters in a inch)
@@ -374,21 +374,21 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			var cityDiv = $('<div>');
 			cityDiv.addClass('city');
 			cityDiv.append(cityUpperCaseFirst + ', ' + countryFullName);
+			cityDiv.addClass('col-6')
 
-	
 			// var countryDiv = $('<div>');
 			// countryDiv.addClass('country');
-			// countryDiv.append(countryFullName);
-			
+			// countryDiv.append(countryFullName);			
 
 			var monthDiv = $('<div>');
 			monthDiv.addClass('month');
 			monthDiv.append(monthNames[selectedMonth]);
+			// monthDiv.addClass('col-6')
 	
 			var exchangeRateConvertedDiv = $('<div>');
 			exchangeRateConvertedDiv.addClass('exchange-rate');
 			exchangeRateConvertedDiv.text(exchangeRateConverted);
-			exchangeRateConvertedDiv.append(" " + currency + '<br>' + " to 1 USD");
+			exchangeRateConvertedDiv.append(" " + currency);
 	
 	
 			var bigMacIndexConvertedDiv = $('<div>');
@@ -403,7 +403,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			var averageMonthRainfallConvertedDiv = $('<div>');
 			averageMonthRainfallConvertedDiv.addClass('rainfall');
 			averageMonthRainfallConvertedDiv.text(averageMonthRainfallConverted);
-			averageMonthRainfallConvertedDiv.append(' in')
+			averageMonthRainfallConvertedDiv.append('in')
 	
 			var countryDollarPriceConvertedDiv = $('<div>');	
 			countryDollarPriceConvertedDiv.addClass('big-mac-price');
@@ -413,8 +413,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			var removeDiv = $('<button>')
 			removeDiv.addClass('remove-button');
 			removeDiv.attr('data-id', dataId);
-			removeDiv.text('X');
-			
+			removeDiv.text('X');		
 
 			var countryFullNameLower = countryFullName.toLowerCase();
 			countryFullNameLower = countryFullNameLower.replace(/\s/g, '-');
@@ -422,18 +421,34 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			var buttonDiv = $("<a href=" + countryLink + " target='_blank'></a>");
 			buttonDiv.append();
 			buttonDiv.addClass('travel-button');
-
-			buttonDiv.text('More Travel Info >>');
+			buttonDiv.addClass('col-1');
+			buttonDiv.text('More Travel Info');
 
 
 			iconDiv0 = $('<div>');
 			iconDiv0.append("<img id='icon0' src='assets/images/final_currency.png' draggable = 'false' />")
+			iconDiv0.append(exchangeRateConvertedDiv);
+			iconDiv0.addClass('icon-box');
+			iconDiv0.addClass('col-1');
+			iconDiv0.attr('id', 'exchange-rate-box');
 			iconDiv1 = $('<div>');
 			iconDiv1.append("<img id='icon1' src='assets/images/final_burger.png' draggable = 'false' />")
+			iconDiv1.append(bigMacIndexConvertedDiv)
+			iconDiv1.addClass('icon-box');
+			iconDiv1.addClass('col-1');
+			iconDiv1.attr('id', 'big-mac-box');
 			iconDiv2 = $('<div>');
 			iconDiv2.append("<img id='icon2' src='assets/images/final_temperature.png' draggable = 'false'/>")
+			iconDiv2.append(averageTempDiv);
+			iconDiv2.addClass('icon-box');
+			iconDiv2.addClass('col-1');
+			iconDiv2.attr('id', 'temp-box');
 			iconDiv3 = $('<div>');
 			iconDiv3.append("<img id='icon3' src='assets/images/final_rainfall.png' draggable = 'false'/>")
+			iconDiv3.append(averageMonthRainfallConvertedDiv);
+			iconDiv3.addClass('icon-box');
+			iconDiv3.addClass('col-1');
+			iconDiv3.attr('id', 'rain-box');
 	
 	
 			
@@ -441,6 +456,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			//Adding listeners for dragging and dropping divs. 
 			// $(cardDiv).addClass('animated fadeOut');
 			$(cardDiv).addClass('animated slideInUp');
+			$(cardDiv).addClass('row');
 			//animation to make the card slide up into the card well
 			
 			$(cardDiv).on('dragstart',handleDragStart);
@@ -451,6 +467,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 			$(cardDiv).on('dragend', handleDragEnd);
 
 			cardDiv.append(cityDiv);
+			cardDiv.append(monthDiv);
 			// cardDiv.append(countryDiv);
 			cardDiv.append(iconDiv0);
 			cardDiv.append(iconDiv1);
@@ -461,11 +478,11 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 	
 			// cardDiv.append(countryDollarPriceConvertedDiv);
 	 
-			cardDiv.append(bigMacIndexConvertedDiv);
-			cardDiv.append(monthDiv);
-			cardDiv.append(averageTempDiv);
+			// cardDiv.append(bigMacIndexConvertedDiv);
+			
+			// cardDiv.append(averageTempDiv);
 	
-			cardDiv.append(averageMonthRainfallConvertedDiv)
-			cardDiv.append(exchangeRateConvertedDiv);
+			// cardDiv.append(averageMonthRainfallConvertedDiv)
+			// cardDiv.append(exchangeRateConvertedDiv);
 			$('#card-well').append(cardDiv);
 		}
