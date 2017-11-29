@@ -20,7 +20,8 @@ body {
 /*--------------- Start of Header elements -------------------- */
 
 #main-header {
-	height: 40px;
+	height: 50px;
+	margin-bottom: 10px;
 }
 .social-icon {
 	width: auto;
@@ -62,7 +63,7 @@ body {
 }
 
 #search-bar-row {
-	margin: 10px 0 0 20px;
+	margin: 10px 0px 0px 0px;
 }
 
 /*.search-bar-text {
@@ -85,7 +86,7 @@ div.search-bars {
 
 #nc-submit-city{
 	opacity: 1;
-	margin-top: 34px;
+	margin-top: 36px;
 	text-align: center;
 	color: 000000;
 	border: 0px #DCDCDC solid;
@@ -237,8 +238,8 @@ label {
 
 
 .remove-button {
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 	color: #777;
 	font: 14px/100% arial, sans-serif;
 	position: absolute;
@@ -402,6 +403,7 @@ div.search-bars {
 
 div.search-bars {
 	height: 100%;
+	width: 100%;
 }
 
 }
@@ -411,6 +413,8 @@ div.search-bars {
 
 div.search-bars {
 	height: 100%;
+	width: 110%;
+	margin-left:; 10px;
 }
 
 }
