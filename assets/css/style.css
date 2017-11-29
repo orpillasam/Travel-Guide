@@ -29,8 +29,7 @@ body {
 	margin: 10px 0 0 10px;
 }
 #social-icon-box {
-	  position: absolute;
-    right: 0px;
+
     height: 40px;
 }
 
@@ -280,10 +279,7 @@ label {
 
 /*---------------Start of styling for the Card Div itself, as well as to make the card grabbable -------------*/
 
-.col-12, .col-sm-12, .col-md-12, .col-lg-12, .col-xl-12 {
-	padding-left: 0px;
-	padding-right: 0px;
-}
+
 .card-div{
 	position: relative;
 	opacity: .8;
@@ -291,8 +287,7 @@ label {
 	font-family: 'Ubuntu', sans-serif;
 /*	font-size: 30px;*/
 	width: 100%;
-	padding-left: -15px;
-	padding-right: -15px;
+
 	height: 120px;
 	border: 3px solid black;
 	border-radius: 3px;
