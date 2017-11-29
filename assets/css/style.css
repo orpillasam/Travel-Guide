@@ -70,7 +70,7 @@ body {
 div.search-bars {
 	background-color: black;
 	opacity: .78;
-	height: 150px;
+	height: 140px;
 	width: 100%;
 	padding-top: 20px;
 	border-radius: 3px;
@@ -324,11 +324,12 @@ label {
   align-items: center;
   height: 100%;
   margin-top: 50px;
-  background-color: white;
+  background-color: black;
   height: 100%;
   border-radius: 15px;
   position: relative;
   padding-top: 15px;
+  opacity: .78;
 
 /*  padding-left: 65px;*/
 
@@ -352,8 +353,8 @@ label {
  .icon-card {
  	margin-top: 10px;
  	background-color: #778899;
- 	border-radius: 15px;
- 	border: 3px solid #DCDCDC;
+/* 	border-radius: 15px;*/
+ 	border: 3px solid black;
  	height: 300px;
 	position: absolute;
 	bottom: 0;
@@ -366,7 +367,7 @@ label {
 
 	text-align: center;
 	position: relative;
-	color: black;
+	color: white;
 }
 
 .directory-icon-container p {
@@ -375,5 +376,5 @@ label {
 	
 	text-align: center;
 	position: relative;
-	color: black;
+	color: white;
 }
