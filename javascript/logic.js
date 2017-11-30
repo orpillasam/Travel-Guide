@@ -415,7 +415,7 @@ function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice,
 	var countryFullNameLower = countryFullName.toLowerCase();
 	countryFullNameLower = countryFullNameLower.replace(/\s/g, '-');
 	var countryLink = "https://travel.state.gov/content/passports/en/country/" + countryFullNameLower + ".html";
-	var buttonDiv = $("<a href=" + countryLink + " target='_blank'></a>");
+	var buttonDiv = $("<a href=" + countryLink + " target='_blank' draggable = 'false'></a>");
 	buttonDiv.addClass('travel-button');
 	buttonDiv.addClass('col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2');
 
