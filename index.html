@@ -30,12 +30,29 @@
 
 		<!--header -->
 		<div class = 'row' id='main-header'>
-			<div class ="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+			<div class ="col-5 col-sm-5 col-md-7 col-lg-8 col-xl-9">
 				<img id="logo" src="assets/images/logo_samesize_bite.png">
 
 			</div>
-			<div class ="col-1 col-sm-1 col-md-4 col-lg-5 col-xl-6">  </div>
-			<div id='social-icon-box' class ="col-5 col-sm-5 col-md-4 col-lg-3 col-xl-2 ">
+<!-- 			<div class ="col-0 col-sm-0 col-md-3 col-lg-4 col-xl-5"> 
+				
+			</div> -->
+			<div id='social-icon-box' class ="col-7 col-sm-7 col-md-5 col-lg-4 col-xl-3 ">
+				<button class='btn btn-outline-dark' id="modal-button">How to Use</button>
+
+				<!-- The Modal -->
+				<div id="myModal" class="modal">
+
+				<!-- Modal content -->
+					<div class="modal-content">
+						<span class="close">&times;</span>
+						<h3>Instructions</h3>
+						<p>Easily compare purchasing power and weather of destinations around the world.</p>
+						<p>1. Enter the city and country</p>
+						<p>2. Enter the month you may wish to travel</p>
+						<p>Open as many travel cards as you wish! You can arrange the cards in any order you wish, and close any you no longer need. </p> 
+					</div>
+				</div> 
 				<a href="https://www.facebook.com/"><img class='social-icon' src="assets/images/facebook_icon.png"></a>
 				<a href="https://www.instagram.com/"><img class='social-icon' src="assets/images/instagram_icon.png"></a>
 				<a href="https://twitter.com/"><img class='social-icon' src="assets/images/twitter_icon.png"></a>
@@ -102,8 +119,9 @@
 				</h3>
 			</div>
 			<div class = 'col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
-				<p>Welcome to TravelByte, a user-friendly app to assist your travel plans. Whether you are planning for a vacation, or simply looking up travel information for fun, we are here for you! So sit back and get ready to take a Byte of your travel plan :)
-				</p>
+				<p>Compare purchasing power and weather of destinations throughout the world. Where do you want to travel?</p>
+			<!-- 	<p>Welcome to TravelByte, a user-friendly app to assist your travel plans. Whether you are planning for a vacation, or simply looking up travel information for fun, we are here for you! So sit back and get ready to take a Byte of your travel plan :)
+				</p> -->
 			</div>
 			<div class = "icon-card col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
 				<h3>Currency Exchange
@@ -134,7 +152,12 @@
 				</p>			
 			</div>
 		</div>	
+		<!-- Trigger/Open The Modal -->
+
 	</div>
+
+	<!-- The Modal -->
+	
 	
 	<script type="text/javascript" src="assets/javascript/logic.js"></script>
 </body>
