@@ -1,0 +1,168 @@
+
+/*-------------Start of Body elements---------------------*/
+* {
+    box-sizing: border-box;
+}
+
+body {
+	background: linear-gradient(rgba(0,0,0,0.2),#AFEEEE 87%), url(../images/background-image.jpeg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+}
+
+/*-------------End of Body elements---------------------*/
+
+
+/*--------------- Start of Header elements -------------------- */
+
+#main-header {
+	height: 50px;
+	margin-bottom: 10px;
+}
+.social-icon {
+	width: auto;
+	height: 100%;
+	margin: 10px 0 0 10px;
+}
+#social-icon-box {
+    height: 40px;
+}
+
+/* small logo on top right */
+#logo {
+	width: auto;
+	height: 100%
+}
+
+/* -------------------End of Header elements ------------------- */
+
+
+
+/* --------------------Start of Search bar area elements ---------------------*/
+
+/* large logo in the middle */
+#logo-main {
+	position: relative;
+	width: 25%;
+	display: block;
+  	margin: 0 auto;
+}
+
+#logo-row p {
+	font-size: 18px;
+	text-align: center;
+	color: white;
+	font-style: bold;
+}
+
+#search-bar-row {
+	margin: 10px 0px 0px 0px;
+}
+
+
+div.search-bars {
+	background-color: black;
+	opacity: .83;
+	height: 140px;
+	width: 100%;
+	padding: 20px;
+	border-radius: 3px;
+	margin-bottom: 20px;
+}
+
+#nc-submit-city{
+	opacity: 1;
+	margin-top: 36px;
+	text-align: center;
+	color: 000000;
+	border: 0px #DCDCDC solid;
+	color: white;
+	background-color: #236B8E;
+}
+
+#nc-submit-city:hover {
+    background-color: #343a40;
+    color: white;
+    text-decoration: none;
+}
+
+#nc-submit-city:visited, #nc-submit-city:link {
+	color: black;
+	text-decoration: none;
+}
+/* ---------------------End of Search bar area elements -----------------------*/
+
+
+/*---------------Bottom Icons Cards ---------------------*/
+
+.directory-icon-container {
+  display:flex;
+  align-items: center;
+  height: 100%;
+  margin-top: 30px;
+  background-color: black;
+  height: 100%;
+  border-radius: 3px;
+  position: relative;
+  padding: 10px;
+  opacity: .83;
+}
+
+.directory-icon {
+	margin-top: 10px;
+  	width: 40%;
+  	display: block;
+  	margin: 0 auto;
+}
+
+ .icon-card {
+ 	margin-top: 10px;
+ 	background-color: #778899;
+ 	border: 3px solid black;
+ 	height: 300px;
+	position: absolute;
+	bottom: 0;
+}
+
+.directory-icon-container h3 {
+	margin-top: 8px;
+	font-size: 22px;
+	text-align: center;
+	position: relative;
+	color: white;
+}
+
+.directory-icon-container p {
+	margin: 10px 5px 5px 5px;
+	font-size: 14px;
+	text-align: center;
+	position: relative;
+	color: white;
+}
+
+/*------------Media Queries-------------*/
+
+
+@media screen and (max-width: 768px) {
+
+div.search-bars {
+	height: 100%;
+	width: 100%;
+}
+
+}
+
+
+@media screen and (max-width: 640px) {
+
+div.search-bars {
+	height: 100%;
+	width: 110%;
+	margin-left:; 10px;
+}
+
+}
