@@ -106,11 +106,10 @@ $(document).ready(function() {
 	------------------------------------------------------------------------*/
 	
 	const bigMacUSD = 5.3;
-	
 
 			// PART 2: Run the info through our APIs and show desired values.
 
-	function getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName, dataId){
+	function getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName, countryProvince, dataId){
 
     	//needs a valid city name input   
    		var queryURL = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=1814235921e94fd2998195653171511&q=" + city + "&format=json&mca=yes&showmap=yes"
@@ -138,16 +137,17 @@ $(document).ready(function() {
 		  var minTempNumber = parseInt(minTemp);
 		  var maxTempNumber = parseInt(maxTemp);
 		  
-		  var averageTemp = (minTempNumber + maxTempNumber) / 2;		 
-		  
+		  var averageTemp = (minTempNumber + maxTempNumber) / 2;		  
+		  var averageTemp = maxTempNumber - 7;	
+
 		  var averageDailyRainfall = (results[selectedMonth].avgDailyRainfall);
 		  var averageMonthRainfall = averageDailyRainfall * 30 / 25.4; //coverts the average rainfall into inches. *(days in a month) /(milimeters in a inch)
 		  
-		  travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName, dataId);
+		  travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName, countryProvince, dataId);
         }); 
     }
     
-    function getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName, dataId) {
+    function getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName, countryProvince, dataId) {
       	//ALERT - will need to change the var country to the country code. will need to put info a country object
     	var queryURL = "https://www.quandl.com/api/v3/datasets/ECONOMIST/BIGMAC_" + country + "?start_date=2017-07-31&end_date=2017-07-31&api_key=9TGtJzuQxqvJizpJDPXX"
             
@@ -167,15 +167,15 @@ $(document).ready(function() {
           // the USA big mac price divided by the big mac price in the input country 
           var bigMacIndex = bigMacUSD / countryDollarPrice;
           
-		  getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName, dataId);
+		  getMonthlyWeather(exchangeRate, currency, bigMacIndex, countryDollarPrice, country, city, selectedMonth, countryFullName, countryProvince, dataId);
         });
 
     }
 
-    function getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName, dataId) { 
+    function getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName, countryProvince, dataId) { 
 
 		// var queryURL = "https://v3.exchangerate-api.com/bulk/4b0db198bb26ff6f36044583/USD"
-		var queryURL = "https://v3.exchangerate-api.com/bulk/8e7d9587b452200d942573dd/USD";
+		var queryURL = "https://v3.exchangerate-api.com/bulk/d6e2faac133e3b07d10ea4c7/USD";
         
         $.ajax({
           url: queryURL,
@@ -189,14 +189,14 @@ $(document).ready(function() {
           var exchangeRate = results[currency];  
           
 
-          getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName, dataId); //We must call getBigMac here because we need the exchange rate after exchange rate is called.
+          getBicMacIndex(exchangeRate, currency, country, city, selectedMonth, countryFullName, countryProvince, dataId); //We must call getBigMac here because we need the exchange rate after exchange rate is called.
 
         });
      }
 
-	function displayValues(currency, country, city, selectedMonth, countryFullName, dataId){
+	function displayValues(currency, country, city, selectedMonth, countryFullName, countryProvince, dataId){
 		//Functions called after each done... to make it synchronous.
-		getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName, dataId);			
+		getCurrentExchangeRate(currency, country, city, selectedMonth, countryFullName, countryProvince, dataId);			
 	} 
 
 	database.ref().on('child_added',function(childSnapshot){
@@ -206,12 +206,12 @@ $(document).ready(function() {
 		var dataCity = childSnapshot.val().cityName;
 		var dataMonth = childSnapshot.val().month;
 		var dataCountryFullName = childSnapshot.val().countryFullName;
+		var dataCountryProvince = childSnapshot.val().countryProvince;
 		var dataId = childSnapshot.key;
 		
-		displayValues(dataCurrency,dataCountry,dataCity,dataMonth,dataCountryFullName, dataId);
-		
-
+		displayValues(dataCurrency,dataCountry,dataCity,dataMonth,dataCountryFullName, dataCountryProvince, dataId);	
 	});
+
 	// 	PART 1: Required Info to search for in the api:
 			// 1. COUNTRY (in ISO-3, caps)	(Get through string manipulation)
 			// 2. CITY    (in caps)	(Get through string manipulation)
@@ -230,7 +230,8 @@ $(document).ready(function() {
           var countryiso2 = data.geobytesinternet;
           var countryiso3 = countryCodeConversion[countryiso2];
           var countryFullName = data.geobytescountry;
-
+          var countryProvince = data.geobytescode;
+          console.log("country province is " + countryProvince)
     	  var city = data.geobytescity.toUpperCase();
     	  var country = countryiso3;
 		  var currency = data.geobytescurrencycode;
@@ -240,11 +241,10 @@ $(document).ready(function() {
 			currency:currency,
 			countryName:country,
 			cityName:city,
-			month:selectedMonth
+			month:selectedMonth,
+			countryProvince:countryProvince
 		}
 		database.ref().push(userSearch);
-		  
-    	//   displayValues();
         });
 	 }
 
@@ -265,9 +265,7 @@ $(document).ready(function() {
 			 
 	 	}else{
 	 		alert('Warning: Bad input!'); //Change later
-		 }
-
-		 
+		 }		 
 	 });
 
 	//Script to remove the card element by clicking the 'X'
@@ -351,119 +349,120 @@ function handleDragEnd(e) {
 	this.classList.remove('over');
 }
 function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, 
-					country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName, dataId){
-	
-			var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-			var cardDiv = $('<div>');
-					
-			var exchangeRateConverted = Math.round(exchangeRate * 100) / 100;
-	
-			var countryDollarPriceConverted = Math.round(countryDollarPrice * 100) / 100;
-			$(countryDollarPriceConverted).addClass('big-mac-price');
-
-			// Always show at least two digits, as a floating number (for site consistency).
-			var bigMacIndexConverted = parseFloat(Math.round(bigMacIndex * 100) / 100).toFixed(2);
-	
-			var averageMonthRainfallConverted = Math.round(averageMonthRainfall * 100) / 100;
+					country, city, selectedMonth, averageTemp, averageMonthRainfall, countryFullName, countryProvince, dataId){
 			
-			//converts city in first letter uppercase
-			var cityLower = city.toLowerCase();
-			var cityUpperCaseFirst = cityLower.charAt(0).toUpperCase() + cityLower.slice(1);
-	
-			var cityDiv = $('<div>');
-			cityDiv.addClass('city');
-			cityDiv.append(cityUpperCaseFirst);
-	
-			var countryDiv = $('<div>');
-			countryDiv.addClass('country');
-			countryDiv.append(countryFullName);
+	$('#logo-main').animateCss('fadeOut');
+	$('#tagline').remove();
+	setTimeout(function(){$('#logo-main').remove()}, 1000);
+	$('#logo-row').animate({height: '0px'});
+
+	var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+	var cardDiv = $('<div>');
 			
+	var exchangeRateConverted = Math.round(exchangeRate * 100) / 100;
 
-			var monthDiv = $('<div>');
-			monthDiv.addClass('month');
-			monthDiv.append(monthNames[selectedMonth]);
-	
-			var exchangeRateConvertedDiv = $('<div>');
-			exchangeRateConvertedDiv.addClass('exchange-rate');
-			exchangeRateConvertedDiv.text(exchangeRateConverted);
-			exchangeRateConvertedDiv.append(" " + currency + '<br>' + " to 1 USD");
-	
-	
-			var bigMacIndexConvertedDiv = $('<div>');
-			bigMacIndexConvertedDiv.addClass('big-mac-index');
-			bigMacIndexConvertedDiv.text(bigMacIndexConverted);  //temporary hard code
-	
-			var averageTempDiv = $('<div>');
-			averageTempDiv.addClass('temperature');
-			averageTempDiv.text(averageTemp); //temperature hard code
-			averageTempDiv.append(" F");
-	
-			var averageMonthRainfallConvertedDiv = $('<div>');
-			averageMonthRainfallConvertedDiv.addClass('rainfall');
-			averageMonthRainfallConvertedDiv.text(averageMonthRainfallConverted);
-			averageMonthRainfallConvertedDiv.append(' in')
-	
-			var countryDollarPriceConvertedDiv = $('<div>');	
-			countryDollarPriceConvertedDiv.addClass('big-mac-price');
-			countryDollarPriceConvertedDiv.text("$")
-			countryDollarPriceConvertedDiv.append(countryDollarPriceConverted);
+	var countryDollarPriceConverted = Math.round(countryDollarPrice * 100) / 100;
+	$(countryDollarPriceConverted).addClass('big-mac-price');
 
-		var removeDiv = $('<button>')
-		removeDiv.addClass('remove-button');
-		removeDiv.attr('data-id', dataId);
-		removeDiv.text('X');
-			
+	// Always show at least two digits, as a floating number (for site consistency).
+	var bigMacIndexConverted = parseFloat(Math.round(bigMacIndex * 100) / 100).toFixed(2);
 
-			var countryFullNameLower = countryFullName.toLowerCase();
-			countryFullNameLower = countryFullNameLower.replace(/\s/g, '-');
-			var countryLink = "https://travel.state.gov/content/passports/en/country/" + countryFullNameLower + ".html";
-			var buttonDiv = $("<a href=" + countryLink + " target='_blank'></a>");
-			buttonDiv.append();
-			buttonDiv.addClass('travel-button');
-
-			buttonDiv.text('Passport/Visa/Embassy Info');
-
-
-			iconDiv0 = $('<div>');
-			iconDiv0.append("<img id='icon0' src='assets/images/final_currency.png' draggable = 'false' />")
-			iconDiv1 = $('<div>');
-			iconDiv1.append("<img id='icon1' src='assets/images/final_burger.png' draggable = 'false' />")
-			iconDiv2 = $('<div>');
-			iconDiv2.append("<img id='icon2' src='assets/images/final_temperature.png' draggable = 'false'/>")
-			iconDiv3 = $('<div>');
-			iconDiv3.append("<img id='icon3' src='assets/images/final_rainfall.png' draggable = 'false'/>")
+	var averageMonthRainfallConverted = Math.round(averageMonthRainfall * 100) / 100;
 	
-	
-			
-			$(cardDiv).attr({'class':'card-div grabbable',  'draggable': true});
-			//Adding listeners for dragging and dropping divs. 
-			// $(cardDiv).addClass('animated fadeOut');
-			$(cardDiv).addClass('animated slideInUp');
-			//animation to make the card slide up into the card well
-			
-			$(cardDiv).on('dragstart',handleDragStart);
-			$(cardDiv).on('dragenter',handleDragEnter);
-			$(cardDiv).on('dragleave', handleDragLeave);
-			$(cardDiv).on('dragover',handleDragOver);
-			$(cardDiv).on('drop', handleDrop);
-			$(cardDiv).on('dragend', handleDragEnd);
+	//converts city in first letter uppercase
+	var cityLower = city.toLowerCase();
+	var cityUpperCaseFirst = cityLower.charAt(0).toUpperCase() + cityLower.slice(1);
 
-			cardDiv.append(cityDiv);
-			cardDiv.append(countryDiv);
-			cardDiv.append(iconDiv0);
-			cardDiv.append(iconDiv1);
-			cardDiv.append(iconDiv2);
-			cardDiv.append(iconDiv3);
-			cardDiv.append(removeDiv);
-			cardDiv.append(buttonDiv);
-	
-			// cardDiv.append(countryDollarPriceConvertedDiv);
-	 
-			cardDiv.append(bigMacIndexConvertedDiv);
-			cardDiv.append(monthDiv);
-			cardDiv.append(averageTempDiv);
-	
-			cardDiv.append(averageMonthRainfallConvertedDiv)
-			cardDiv.append(exchangeRateConvertedDiv);
-			$('#card-well').append(cardDiv);
-		}
+	var cityDiv = $('<div>');
+	cityDiv.addClass('city');
+	cityDiv.append(cityUpperCaseFirst + ', ' + countryProvince + ', ' + countryFullName);
+	cityDiv.addClass('col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8')	
+
+	var monthDiv = $('<div>');
+	monthDiv.addClass('month');
+	monthDiv.append(monthNames[selectedMonth]);
+	monthDiv.addClass('col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3')
+
+	var exchangeRateConvertedDiv = $('<div>');
+	exchangeRateConvertedDiv.addClass('exchange-rate');
+	exchangeRateConvertedDiv.text(exchangeRateConverted);
+	exchangeRateConvertedDiv.append(" " + currency);
+
+	var bigMacIndexConvertedDiv = $('<div>');
+	bigMacIndexConvertedDiv.addClass('big-mac-index');
+	bigMacIndexConvertedDiv.text(bigMacIndexConverted);  //temporary hard code
+
+	var averageTempDiv = $('<div>');
+	averageTempDiv.addClass('temperature');
+	averageTempDiv.text(averageTemp); //temperature hard code
+	averageTempDiv.append(" F");
+
+	var averageMonthRainfallConvertedDiv = $('<div>');
+	averageMonthRainfallConvertedDiv.addClass('rainfall');
+	averageMonthRainfallConvertedDiv.text(averageMonthRainfallConverted);
+	averageMonthRainfallConvertedDiv.append(' in')
+
+	var countryDollarPriceConvertedDiv = $('<div>');	
+	countryDollarPriceConvertedDiv.addClass('big-mac-price');
+	countryDollarPriceConvertedDiv.text("$")
+	countryDollarPriceConvertedDiv.append(countryDollarPriceConverted);
+
+	var removeDiv = $('<button>')
+	removeDiv.addClass('remove-button');
+	removeDiv.attr('data-id', dataId);
+	removeDiv.text('X');		
+
+	var countryFullNameLower = countryFullName.toLowerCase();
+	countryFullNameLower = countryFullNameLower.replace(/\s/g, '-');
+	var countryLink = "https://travel.state.gov/content/passports/en/country/" + countryFullNameLower + ".html";
+	var buttonDiv = $("<a href=" + countryLink + " target='_blank'></a>");
+	buttonDiv.addClass('travel-button');
+	buttonDiv.addClass('col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2');
+
+	var buttonText = $('<div>');
+	buttonText.addClass('button-text');
+	buttonText.text('Visa Passport Embassy');
+	buttonDiv.append(buttonText);
+
+	iconDiv0 = $('<div>');
+	iconDiv0.append("<img id='icon0' src='assets/images/final_currency.png' draggable = 'false' />")
+	iconDiv0.append(exchangeRateConvertedDiv);
+	iconDiv0.addClass('icon-box col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2');
+	iconDiv0.attr('id', 'exchange-rate-box');
+	iconDiv1 = $('<div>');
+	iconDiv1.append("<img id='icon1' src='assets/images/final_burger.png' draggable = 'false' />")
+	iconDiv1.append(bigMacIndexConvertedDiv)
+	iconDiv1.addClass('icon-box col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2');
+	iconDiv1.attr('id', 'big-mac-box');
+	iconDiv2 = $('<div>');
+	iconDiv2.append("<img id='icon2' src='assets/images/final_temperature.png' draggable = 'false'/>")
+	iconDiv2.append(averageTempDiv);
+	iconDiv2.addClass('icon-box col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2');
+	iconDiv2.attr('id', 'temp-box');
+	iconDiv3 = $('<div>');
+	iconDiv3.append("<img id='icon3' src='assets/images/final_rainfall.png' draggable = 'false'/>")
+	iconDiv3.append(averageMonthRainfallConvertedDiv);
+	iconDiv3.addClass('icon-box col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2');
+	iconDiv3.attr('id', 'rain-box');
+
+	$(cardDiv).attr({'class':'card-div grabbable',  'draggable': true});//Adding listeners for dragging and dropping divs. 
+	$(cardDiv).addClass('animated slideInUp');
+	$(cardDiv).addClass('row');//animation to make the card slide up into the card well	
+	$(cardDiv).on('dragstart',handleDragStart);
+	$(cardDiv).on('dragenter',handleDragEnter);
+	$(cardDiv).on('dragleave', handleDragLeave);
+	$(cardDiv).on('dragover',handleDragOver);
+	$(cardDiv).on('drop', handleDrop);
+	$(cardDiv).on('dragend', handleDragEnd);
+
+	cardDiv.append(cityDiv);
+	cardDiv.append(monthDiv);
+	cardDiv.append(iconDiv0);
+	cardDiv.append(iconDiv1);
+	cardDiv.append(iconDiv2);
+	cardDiv.append(iconDiv3);
+	cardDiv.append(removeDiv);
+	cardDiv.append(buttonDiv);
+
+	$('#card-well').append(cardDiv);
+}
