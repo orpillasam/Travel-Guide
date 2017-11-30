@@ -345,7 +345,7 @@ function handleDrop(e) {
 }
 function handleDragEnd(e) {
 // this/e.target is the source node.
-	this.style.opacity = '1.0';
+	this.style.opacity = '0.83';
 	this.classList.remove('over');
 }
 function travelCard(exchangeRate, currency, bigMacIndex, countryDollarPrice, 
