@@ -13,4 +13,9 @@ Nathan Chen
 Eunji Russ
 Rebecca Olson
 
+--------------------------------------------------------
 
+Our first group project, which was to combine all the knowledge from the previous 7 weeks into making a functional web app.
+
+TravelByte was developed by us as an application that would help people get more information about destinations they would travel to.
+This information is pulled from multiple API's then dynamcially displayed on screen.  
